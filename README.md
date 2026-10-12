@@ -4,78 +4,84 @@ The website for **Webford Digital Services**: bespoke websites with a personal s
 
 **Stack:** Next.js 16 on **Cloudflare Workers** (via OpenNext) · **Neon** Postgres with Drizzle ORM. Same setup as Strength Circus, WHEA GB and Bake Chic.
 
-Text in `[SQUARE BRACKETS]` still needs filling in before launch. Almost all of it lives in **`src/content/site.ts`**: prices, package limits, contact details, portfolio links and FAQs.
+Text in `[SQUARE BRACKETS]` still needs filling in before launch. Once the database is set up, you change it all from the **admin site** at `/admin`: prices, packages, contact details, portfolio and FAQs. (`src/content/site.ts` holds the starting text and is only used as a fallback.)
 
 ---
 
-## What's built (phase 1)
+## What's built
 
-- Home page from the approved wireframe: hero, selling points, bespoke vs template comparison, services, portfolio, admin showcase, how it works, Bronze/Silver/Gold packages, care plan, about, FAQs, enquiry form, footer
-- Enquiry form: validates, blocks spam bots (honeypot) and **saves to the `enquiries` table** once `DATABASE_URL` is set
-- Placeholder pages for terms, privacy and cookies (linked from the footer)
-- Logo files in `public/brand/` (SVG with text as outlines, plus PNGs) and the browser/phone icons (`src/app/icon.png`, `apple-icon.png`)
-- Hidden from search engines until launch (`allowIndexing` in `src/content/site.ts`)
-- `/api/status` setup check
+**Phase 1:** homepage from the approved wireframe, enquiry form (validates, blocks spam bots, saves to the database), placeholder legal pages, logo files in `public/brand/`, browser/phone icons, hidden from search engines until launch, `/api/status` setup check.
 
-**Next phases:** admin site (packages, portfolio, FAQs, enquiries), email notification for new enquiries, virtual agent, real terms and privacy wording, portfolio case-study pages.
+**Phase 2: admin site at `/admin`** (password protected)
+- **Overview:** latest enquiries and counts
+- **Enquiries:** everyone who filled in the form; filter by status (New, Contacted, Quoted, Won, Lost), add private notes, reply by email, delete
+- **Packages & prices:** Bronze, Silver and Gold (name, price, description, what's included, badge) plus the care plan
+- **Portfolio:** add, edit, reorder, hide or delete websites (description, tags, live link, screenshot)
+- **FAQs:** add, edit, reorder, hide or delete
+- **Contact details:** email, phone, address, area, reply time
+- **Email alert** to you for every new enquiry (optional, via Resend)
 
-## 1. Run it locally
+Changes show on the website straight away.
+
+**Next:** virtual agent (using your FAQs), real terms and privacy wording, portfolio case-study pages, image uploads in the admin.
+
+## 1. Set up the database (Neon), no PC needed
+
+Open your Neon project (`webford-digital`, London region) → **SQL Editor**, paste in the whole of **`scripts/neon-setup.sql`** and click **Run**.
+
+It's safe to run more than once: it only creates what's missing, only fills empty tables with the starting content, and never touches your enquiries. Run it again whenever a new phase adds tables.
+
+<details><summary>Or from your PC</summary>
+
+```bash
+npm ci
+copy .env.example .env          # then paste your Neon pooled connection string into DATABASE_URL
+npm run db:migrate              # creates/updates the tables
+npm run db:seed                 # adds the starting content to empty tables
+```
+
+Both routes record the same migrations, so you can switch between them.
+</details>
+
+## 2. Add the secrets in Cloudflare
+
+**Workers & Pages → webford-digital → Settings → Variables and secrets → Add**, type **Secret** (not the Build section):
+
+| Name | Value |
+|---|---|
+| `DATABASE_URL` | Neon pooled connection string (already done) |
+| `ADMIN_PASSWORD` | the password you'll log in with: long and unique |
+| `ADMIN_SESSION_SECRET` | 32+ random characters. Generate one at a password generator, or run `node -e "console.log(crypto.randomUUID()+crypto.randomUUID())"` |
+| `RESEND_API_KEY` | *(optional, for email alerts)* from resend.com → API Keys |
+| `ENQUIRY_EMAIL_TO` | *(optional)* where alerts go. Until you verify your own domain in Resend, this must be the email address you signed up to Resend with |
+| `ENQUIRY_EMAIL_FROM` | *(optional)* leave unset to use `Webford website <onboarding@resend.dev>`; once your domain is verified in Resend, e.g. `Webford website <hello@yourdomain.co.uk>` |
+
+**Check:** open `/api/status` on the site. Everything should say `"set"` / `true` (it shows yes/no only, never the values). Then go to `/admin` and log in.
+
+## 3. Deploy to Cloudflare
+
+Already connected: every push to `main` deploys automatically. (Original settings: build command `npx opennextjs-cloudflare build`, deploy command `npx opennextjs-cloudflare deploy`, project name `webford-digital`.)
+
+## Run it locally (optional)
 
 ```bash
 npm ci               # install exactly what's in package-lock.json (use this after every git pull)
 npm run dev          # http://localhost:3004
 ```
 
-The home page works without the database. The enquiry form shows a friendly "not connected yet" message until it has one.
-
-## 2. Create the database table (Neon)
-
-1. Neon project: `webford-digital`, region **AWS Europe West 2 (London)**.
-2. Copy `.env.example` to **both** `.env` and `.dev.vars` (Windows: `copy .env.example .env` and `copy .env.example .dev.vars`).
-3. Paste your Neon **pooled** connection string into `DATABASE_URL` in both files. These files are git-ignored, so never commit them.
-4. Run:
-
-```bash
-npm run db:migrate   # creates the enquiries table from drizzle/0000_init.sql
-```
-
-See enquiries with `npm run db:studio` (until the admin site is built).
-
-## 3. Deploy to Cloudflare
-
-**Cloudflare → Workers & Pages → Create → Import a repository → `SDunford85/webford-digital`**
-
-| Setting | Value |
-|---|---|
-| Project name | `webford-digital` (must match `name` in `wrangler.jsonc`) |
-| Build command | `npx opennextjs-cloudflare build` |
-| Deploy command | `npx opennextjs-cloudflare deploy` |
-| Root directory | `/` |
-
-Then add the database secret from your own PC, in the project folder:
-
-```
-npx wrangler login                     # one-off
-npx wrangler secret put DATABASE_URL   # Neon pooled connection string (no quotes)
-```
-
-⚠️ If you use the dashboard instead: add it under **Workers → webford-digital → Settings → Variables and secrets** (type **Secret**), **not** the "Variables and secrets" inside the **Build** section, which the running site never sees.
-
-**Check:** open `/api/status` on the site. It should show `"DATABASE_URL": "set"` and `"database_connects": true`.
-
-Every push to `main` now deploys automatically. Update `NEXT_PUBLIC_SITE_URL` in `wrangler.jsonc` if your workers.dev address differs.
+Copy `.env.example` to `.env` **and** `.dev.vars` and fill them in. The homepage works without a database; the admin needs one.
 
 ## 4. Adding your screenshots and photo
 
-- Portfolio: save each screenshot as WebP in `public/images/work/` (e.g. `bake-chic.webp`, about 1600×900) and set `image: "/images/work/bake-chic.webp"` for that project in `src/content/site.ts`. Add each live address to `url`.
+- Portfolio: save each screenshot as WebP in `public/images/work/` (e.g. `bake-chic.webp`, about 1600×900, under 300 KB) and push it to GitHub (on github.com: open the folder → **Add file → Upload files**). Then in **Admin → Portfolio**, put `/images/work/bake-chic.webp` in that website's **Screenshot** box and add its live address.
 - About: save your photo as `public/images/steve.webp` and swap it in at the "[Photo of Steve]" box in `src/app/(site)/page.tsx`.
 
 ## 5. Launch checklist
 
-- [ ] All `[brackets]` replaced (search the project for `[`)
+- [ ] All `[brackets]` replaced: check every admin page, then the homepage
 - [ ] Terms, privacy and cookie pages written and checked
 - [ ] Domain connected in Cloudflare and `NEXT_PUBLIC_SITE_URL` updated
-- [ ] Test enquiry received
+- [ ] Test enquiry received, and the email alert arrives
 - [ ] `allowIndexing = true` in `src/content/site.ts`
 
 ## Brand

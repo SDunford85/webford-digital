@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { getDb, hasDb, schema } from "@/db";
+import { notifyNewEnquiry } from "@/lib/notify";
 
 export type EnquiryState = { ok: boolean; message: string; errors?: Record<string, string>; at?: number };
 
@@ -23,7 +24,7 @@ const Enquiry = z.object({
   consent: z.literal("on", { error: "Please tick the box so I can reply to you" }),
 });
 
-/** Saves an enquiry from the contact form. Email notifications are added in phase 2. */
+/** Saves an enquiry from the contact form and emails Steve (if email is set up). */
 export async function sendEnquiry(_prev: EnquiryState, fd: FormData): Promise<EnquiryState> {
   // Honeypot: real people never fill this hidden field in.
   if (String(fd.get("website") ?? "") !== "") return { ok: true, message: "Thanks, your enquiry has been sent.", at: Date.now() };
@@ -55,7 +56,11 @@ export async function sendEnquiry(_prev: EnquiryState, fd: FormData): Promise<En
 
   try {
     const { consent, ...rest } = parsed.data;
-    await getDb().insert(schema.enquiries).values({ ...rest, consent: consent === "on" });
+    const [saved] = await getDb()
+      .insert(schema.enquiries)
+      .values({ ...rest, consent: consent === "on" })
+      .returning({ id: schema.enquiries.id });
+    await notifyNewEnquiry({ id: saved.id, ...rest });
     return { ok: true, message: "Thanks, your enquiry has been sent. I’ll be in touch soon.", at: Date.now() };
   } catch (err) {
     console.error("[enquiry]", err);

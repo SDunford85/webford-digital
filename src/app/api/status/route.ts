@@ -17,10 +17,15 @@ export async function GET() {
       databaseConnects = false;
     }
   }
+  const secret = process.env.ADMIN_SESSION_SECRET ?? "";
   return Response.json(
     {
       DATABASE_URL: hasDb() ? "set" : "MISSING",
       database_connects: databaseConnects,
+      ADMIN_PASSWORD: process.env.ADMIN_PASSWORD ? "set" : "MISSING",
+      ADMIN_SESSION_SECRET: secret ? (secret.length >= 32 ? "set" : "TOO SHORT (needs 32+ characters)") : "MISSING",
+      RESEND_API_KEY: process.env.RESEND_API_KEY ? "set" : "not set (enquiry emails off)",
+      ENQUIRY_EMAIL_TO: process.env.ENQUIRY_EMAIL_TO ? "set" : "not set (enquiry emails off)",
     },
     { headers: { "Cache-Control": "no-store" } },
   );

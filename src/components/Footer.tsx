@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
-import { business, nav } from "@/content/site";
+import { nav } from "@/content/site";
+import type { Business } from "@/lib/content";
 
-export function Footer() {
+export function Footer({ business }: { business: Business }) {
   const year = new Date().getFullYear();
   return (
     <footer className="bg-ink text-[15px] text-muted-dark">

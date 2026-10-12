@@ -1,11 +1,13 @@
 import { AdminPreview } from "@/components/AdminPreview";
 import { EnquiryForm } from "@/components/EnquiryForm";
 import { Check, Icon } from "@/components/Icon";
-import { business, carePlan, comparison, faqs, features, packages, portfolio, sellingPoints, steps } from "@/content/site";
+import { comparison, features, sellingPoints, steps } from "@/content/site";
+import { getSiteContent } from "@/lib/content";
 
 const dot: Record<string, string> = { bronze: "bg-[#a86b3c]", silver: "bg-[#9ca3af]", gold: "bg-gold" };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { business, carePlan, faqs, packages, portfolio } = await getSiteContent();
   return (
     <>
       {/* ---------- Hero ---------- */}

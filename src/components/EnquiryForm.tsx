@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { startTransition, useActionState } from "react";
 import { sendEnquiry, type EnquiryState } from "@/app/(site)/actions";
 import { enquiryNeeds, packageChoices } from "@/content/site";
 
@@ -50,7 +50,17 @@ export function EnquiryForm() {
   const err = (k: string) => (e[k] ? { "aria-invalid": true, "aria-describedby": `f-${k}-error` } : {});
 
   return (
-    <form action={action} noValidate aria-label="Enquiry form" className="grid gap-5 rounded-2xl border border-line bg-stone p-6 sm:grid-cols-2 sm:p-8">
+    <form
+      action={action}
+      onSubmit={(ev) => {
+        // Submit ourselves so a validation error doesn't clear what the visitor has typed
+        // (React resets a form after every submit otherwise).
+        ev.preventDefault();
+        const fd = new FormData(ev.currentTarget);
+        startTransition(() => action(fd));
+      }}
+      noValidate
+      aria-label="Enquiry form" className="grid gap-5 rounded-2xl border border-line bg-stone p-6 sm:grid-cols-2 sm:p-8">
       <Field id="f-name" label="Your name" error={e.name}>
         <input id="f-name" name="name" type="text" autoComplete="name" required className="field" {...err("name")} />
       </Field>

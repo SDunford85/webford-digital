@@ -21,3 +21,4 @@ export function hasDb() {
 }
 
 export { schema };
+export type { Enquiry, Package, ProjectRow, Faq } from "./schema";
