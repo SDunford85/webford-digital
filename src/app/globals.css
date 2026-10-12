@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+/* Webford Digital Services design tokens — from the approved wireframe */
+@theme {
+  --color-ink: #0b0d12; /* black */
+  --color-ink-2: #161a23; /* raised dark panel */
+  --color-ink-line: #2a303c; /* borders on dark */
+  --color-navy: #0c1a3a;
+  --color-navy-line: #2b3b63;
+  --color-blue: #1846c8; /* Webford blue — buttons, links, highlights */
+  --color-blue-dark: #0f3299;
+  --color-blue-light: #4c7bf4; /* for the logo and icons on black */
+  --color-blue-tint: #f2f5fd;
+  --color-gold: #d4a72c; /* fills, borders and text on dark only */
+  --color-gold-dark: #b8901f;
+  --color-gold-text: #8a6510; /* gold-toned text that passes contrast on light backgrounds */
+  --color-stone: #f6f6f3;
+  --color-line: #e5e3dc;
+  --color-line-soft: #efede7;
+  --color-muted: #4b5563;
+  --color-muted-dark: #d1d5db; /* body text on dark */
+
+  --font-sans: "DM Sans Variable", system-ui, sans-serif;
+  --font-display: "Sora Variable", "DM Sans Variable", system-ui, sans-serif;
+}
+
+html {
+  background: #fff;
+  color: var(--color-ink);
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+body {
+  font-family: var(--font-sans);
+}
+
+@layer components {
+  .container-wf {
+    max-width: 1200px;
+    margin-inline: auto;
+  }
+  .kicker {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(30px, 3.4vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+  }
+
+  /* Buttons — all at least 44px tall */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .btn-gold {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+  .btn-gold:hover {
+    background: #e0b84a;
+  }
+  .btn-blue {
+    background: var(--color-blue);
+    color: #fff;
+  }
+  .btn-blue:hover {
+    background: var(--color-blue-dark);
+  }
+  .btn-outline-light {
+    border: 1.5px solid #fff;
+    color: #fff;
+  }
+  .btn-outline-light:hover {
+    background: rgb(255 255 255 / 0.1);
+  }
+  .btn-outline-dark {
+    border: 1.5px solid var(--color-ink);
+    color: var(--color-ink);
+  }
+  .btn-outline-dark:hover {
+    background: var(--color-ink);
+    color: #fff;
+  }
+
+  .field {
+    width: 100%;
+    font: inherit;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid #d6d3cb;
+    border-radius: 10px;
+    background: #fff;
+    color: var(--color-ink);
+  }
+  .field:focus {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 1px;
+    border-color: var(--color-blue);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details[open] .faq-plus {
+  transform: rotate(45deg);
+}
