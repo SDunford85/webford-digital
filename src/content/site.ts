@@ -69,28 +69,28 @@ export const portfolio: Project[] = [
     summary: "A vibrant, fun online shop for a bake shed selling brownies, blondies, cookies, flapjacks, cakes and bake boxes.",
     tags: ["Online shop", "Product pages", "Order rota countdown", "Reviews", "Card payments"],
     url: "#",
-    image: null,
+    image: "/images/work/bake-chic.webp",
   },
   {
     name: "Hire Services",
     summary: "A rental website where customers sign in, add items to a basket and hire them for the dates they choose.",
     tags: ["Date-range booking", "Customer accounts", "Basket", "Card payments"],
     url: "#",
-    image: null,
+    image: "/images/work/hire-services.webp",
   },
   {
     name: "WHEA GB",
     summary: "A new website for the World Heavy Events Association GB, putting natural, drug-tested strongman and strongwoman front and centre.",
     tags: ["National sporting body", "Events", "Brand-led design", "[Add feature]"],
     url: "#",
-    image: null,
+    image: "/images/work/whea-gb.webp",
   },
   {
     name: "Strength Circus",
     summary: "A strongman-at-heart community gym in Malton, with a merch shop, class and PT booking, and a virtual agent for FAQs.",
     tags: ["Merch shop", "GymFlow booking integration", "Virtual agent", "Card payments"],
     url: "#",
-    image: null,
+    image: "/images/work/strength-circus.webp",
   },
 ];
 

@@ -91,10 +91,10 @@ SELECT * FROM (VALUES
 WHERE NOT EXISTS (SELECT 1 FROM "packages");
 INSERT INTO "projects" ("name", "summary", "tags", "url", "image_url", "sort_order")
 SELECT * FROM (VALUES
-  ('Bake Chic', 'A vibrant, fun online shop for a bake shed selling brownies, blondies, cookies, flapjacks, cakes and bake boxes.', ARRAY['Online shop', 'Product pages', 'Order rota countdown', 'Reviews', 'Card payments']::text[], NULL, NULL, 0),
-  ('Hire Services', 'A rental website where customers sign in, add items to a basket and hire them for the dates they choose.', ARRAY['Date-range booking', 'Customer accounts', 'Basket', 'Card payments']::text[], NULL, NULL, 1),
-  ('WHEA GB', 'A new website for the World Heavy Events Association GB, putting natural, drug-tested strongman and strongwoman front and centre.', ARRAY['National sporting body', 'Events', 'Brand-led design', '[Add feature]']::text[], NULL, NULL, 2),
-  ('Strength Circus', 'A strongman-at-heart community gym in Malton, with a merch shop, class and PT booking, and a virtual agent for FAQs.', ARRAY['Merch shop', 'GymFlow booking integration', 'Virtual agent', 'Card payments']::text[], NULL, NULL, 3)
+  ('Bake Chic', 'A vibrant, fun online shop for a bake shed selling brownies, blondies, cookies, flapjacks, cakes and bake boxes.', ARRAY['Online shop', 'Product pages', 'Order rota countdown', 'Reviews', 'Card payments']::text[], NULL, '/images/work/bake-chic.webp', 0),
+  ('Hire Services', 'A rental website where customers sign in, add items to a basket and hire them for the dates they choose.', ARRAY['Date-range booking', 'Customer accounts', 'Basket', 'Card payments']::text[], NULL, '/images/work/hire-services.webp', 1),
+  ('WHEA GB', 'A new website for the World Heavy Events Association GB, putting natural, drug-tested strongman and strongwoman front and centre.', ARRAY['National sporting body', 'Events', 'Brand-led design', '[Add feature]']::text[], NULL, '/images/work/whea-gb.webp', 2),
+  ('Strength Circus', 'A strongman-at-heart community gym in Malton, with a merch shop, class and PT booking, and a virtual agent for FAQs.', ARRAY['Merch shop', 'GymFlow booking integration', 'Virtual agent', 'Card payments']::text[], NULL, '/images/work/strength-circus.webp', 3)
 ) AS v
 WHERE NOT EXISTS (SELECT 1 FROM "projects");
 INSERT INTO "faqs" ("question", "answer", "sort_order")
