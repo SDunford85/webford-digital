@@ -2,7 +2,7 @@
  * The starting content for the admin-managed tables, taken from src/content/site.ts.
  * Used by `npm run db:seed` and by `npm run db:neon-sql` (which writes a script to paste into Neon's SQL Editor).
  */
-import { business, carePlan, faqs, packages, portfolio } from "../src/content/site";
+import { business, carePlan, faqs, hostingPlan, packages, portfolio, spreadCost } from "../src/content/site";
 
 export const defaultSettings: Record<string, string> = {
   email: business.email,
@@ -12,6 +12,10 @@ export const defaultSettings: Record<string, string> = {
   reply_time: business.replyTime,
   care_plan_price: carePlan.price,
   care_plan_body: carePlan.body,
+  hosting_price: hostingPlan.price,
+  hosting_body: hostingPlan.body,
+  spread_title: spreadCost.title,
+  spread_body: spreadCost.body,
 };
 
 export const defaultPackages = packages.map((p, i) => ({

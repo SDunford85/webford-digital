@@ -1,6 +1,7 @@
 import { asc } from "drizzle-orm";
 import { getDb, hasDb, schema } from "@/db";
 import { getSettings } from "@/lib/content";
+import { hostingPlan, spreadCost } from "@/content/site";
 import { AdminForm, Area, Field } from "../../AdminForm";
 import { savePackage, saveSettings } from "../../actions";
 
@@ -48,16 +49,38 @@ export default async function AdminPackages() {
       </div>
 
       {hasDb() && (
-        <section className="mt-8 max-w-2xl rounded-2xl border border-line bg-white p-6">
-          <h2 className="m-0 font-display text-xl font-bold">Hosting and care plan</h2>
-          <p className="mb-4 mt-1 text-sm text-muted">The strip under the packages.</p>
-          <AdminForm action={saveSettings} submitLabel="Save care plan">
-            <div className="mb-4 flex flex-col gap-4">
-              <Field label="Price" name="care_plan_price" defaultValue={settings.care_plan_price} hint="e.g. £35/month" />
-              <Area label="Description" name="care_plan_body" defaultValue={settings.care_plan_body} rows={2} />
-            </div>
-          </AdminForm>
-        </section>
+        <div className="mt-8 grid gap-6 lg:grid-cols-3">
+          <section className="rounded-2xl border border-line bg-white p-6">
+            <h2 className="m-0 font-display text-xl font-bold">Hosting only</h2>
+            <p className="mb-4 mt-1 text-sm text-muted">The lower-cost monthly plan under the packages.</p>
+            <AdminForm action={saveSettings} submitLabel="Save hosting plan">
+              <div className="mb-4 flex flex-col gap-4">
+                <Field label="Price" name="hosting_price" defaultValue={settings.hosting_price ?? "£5/month"} hint="e.g. £5/month" />
+                <Area label="Description" name="hosting_body" defaultValue={settings.hosting_body ?? hostingPlan.body} rows={3} />
+              </div>
+            </AdminForm>
+          </section>
+          <section className="rounded-2xl border border-line bg-white p-6">
+            <h2 className="m-0 font-display text-xl font-bold">Care plan</h2>
+            <p className="mb-4 mt-1 text-sm text-muted">The full monthly plan, next to Hosting only.</p>
+            <AdminForm action={saveSettings} submitLabel="Save care plan">
+              <div className="mb-4 flex flex-col gap-4">
+                <Field label="Price" name="care_plan_price" defaultValue={settings.care_plan_price} hint="e.g. £25/month" />
+                <Area label="Description" name="care_plan_body" defaultValue={settings.care_plan_body} rows={3} />
+              </div>
+            </AdminForm>
+          </section>
+          <section className="rounded-2xl border border-line bg-white p-6">
+            <h2 className="m-0 font-display text-xl font-bold">Spread the cost</h2>
+            <p className="mb-4 mt-1 text-sm text-muted">The payment-options banner under the packages.</p>
+            <AdminForm action={saveSettings} submitLabel="Save payment options">
+              <div className="mb-4 flex flex-col gap-4">
+                <Field label="Heading" name="spread_title" defaultValue={settings.spread_title ?? spreadCost.title} />
+                <Area label="Text" name="spread_body" defaultValue={settings.spread_body ?? spreadCost.body} rows={3} />
+              </div>
+            </AdminForm>
+          </section>
+        </div>
       )}
     </>
   );

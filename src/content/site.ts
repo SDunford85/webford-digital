@@ -24,6 +24,7 @@ export const business = {
 };
 
 export const nav = [
+  { href: "/#why", label: "Why Webford" },
   { href: "/#services", label: "Services" },
   { href: "/#work", label: "Our work" },
   { href: "/#packages", label: "Packages" },
@@ -165,8 +166,30 @@ export const packages: Package[] = [
 
 export const carePlan = {
   price: "£[PRICE]/month",
-  body: "Secure hosting, updates, backups and small content changes, all looked after for you.",
+  body: "Everything in Hosting, plus software updates, backups, uptime checks and up to 30 minutes of changes a month.",
 };
+
+export const hostingPlan = {
+  price: "£5/month",
+  body: "Fast, secure hosting with a security certificate and your domain renewal included. Changes are charged only when you need them.",
+};
+
+export const spreadCost = {
+  title: "Spread the cost",
+  body: "Pay a deposit to get started, then the rest in up to 6 interest-free monthly payments. Your website is yours once the last payment is made.",
+};
+
+/** "Why Webford": the reasons to choose a bespoke site. `stat` shows big in place of the number. */
+export const benefits: { title: string; body: string; stat?: string; statLabel?: string; wide?: boolean }[] = [
+  { title: "Done for you", body: "No evenings wrestling a template. Tell me what you need, and I design and build it.", stat: "0", statLabel: "evenings lost to a template", wide: true },
+  { title: "Built around your business", body: "Order rotas, date-range hire, bookings: features that fit how you work, not what a theme allows." },
+  { title: "No platform subscription", body: "No monthly bill that climbs with every app. Features are built in, not rented.", stat: "£0", statLabel: "platform fees" },
+  { title: "Lower card fees", body: "Card payments through Stripe, so more of every sale stays with you.", stat: "1.5% + 20p", statLabel: "per UK card sale" },
+  { title: "You own it", body: "Once it’s paid for, your website and domain are yours. Move it whenever you like, with no lock-in.", wide: true },
+  { title: "A real person", body: "Call or email the person who built your site. No help-centre queue." },
+  { title: "An admin made for you", body: "Update products, prices and photos yourself, in an admin area designed around your day.", wide: true },
+  { title: "10+ years in business software", body: "I’ve spent more than a decade helping organisations implement and run software. I build for how you actually work.", stat: "10+", statLabel: "years’ experience", wide: true },
+];
 
 export const faqs = [
   { q: "How much does a website cost?", a: "Packages start from £[PRICE]. After a free chat you’ll get a fixed quote, so there are no surprises." },

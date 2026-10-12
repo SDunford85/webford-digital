@@ -3,13 +3,13 @@ import { EnquiryForm } from "@/components/EnquiryForm";
 import { HeroShowcase } from "@/components/HeroShowcase";
 import { LogoMark } from "@/components/Logo";
 import { Check, Icon } from "@/components/Icon";
-import { comparison, features, sellingPoints, steps } from "@/content/site";
+import { benefits, comparison, features, sellingPoints, steps } from "@/content/site";
 import { getSiteContent } from "@/lib/content";
 
 const dot: Record<string, string> = { bronze: "bg-[#a86b3c]", silver: "bg-[#9ca3af]", gold: "bg-gold" };
 
 export default async function HomePage() {
-  const { business, carePlan, faqs, packages, portfolio } = await getSiteContent();
+  const { business, carePlan, hostingPlan, spreadCost, faqs, packages, portfolio } = await getSiteContent();
   const showcase = portfolio.filter((p): p is typeof p & { image: string } => Boolean(p.image));
   return (
     <>
@@ -56,6 +56,64 @@ export default async function HomePage() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* ---------- Why Webford: rent vs own ---------- */}
+      <section id="why" aria-labelledby="why-h" className="relative overflow-hidden bg-navy text-white">
+        {/* Large faint woven W, purely decorative */}
+        <LogoMark tone="light" className="pointer-events-none absolute -right-24 -top-10 h-[520px] w-auto opacity-[0.05]" />
+        <div className="container-wf relative px-4 py-24 sm:px-6">
+          <div className="grid items-end gap-6 lg:grid-cols-[7fr_5fr]">
+            <div className="flex flex-col gap-3.5">
+              <p className="kicker m-0 text-gold">Why Webford</p>
+              <h2 id="why-h" className="m-0 font-display text-[clamp(34px,4.6vw,56px)] font-bold leading-[1.05] tracking-[-0.02em]">
+                Don&apos;t rent a website.
+                <br />
+                <span className="text-gold">Own one.</span>
+              </h2>
+            </div>
+            <p className="m-0 text-[17px] text-[#cbd5e1] lg:pb-2">
+              Template builders charge you every month, for as long as you want to stay online, and the bill grows with every feature you add. A Webford site is
+              built for you, then it&apos;s yours.
+            </p>
+          </div>
+
+          <ul className="m-0 mt-12 grid list-none grid-flow-dense grid-cols-1 gap-4 p-0 sm:grid-cols-2 lg:grid-cols-4">
+            {benefits.map((b, i) => (
+              <li
+                key={b.title}
+                className={`group flex flex-col gap-3 rounded-2xl border p-7 transition-colors ${b.wide ? "sm:col-span-2" : ""} ${
+                  i === 0 || i === 4 ? "border-gold bg-ink" : "border-navy-line bg-[#11234a] hover:border-[#41558a]"
+                }`}
+              >
+                {b.stat ? (
+                  <p className="m-0 flex flex-col">
+                    <span className="font-display text-[clamp(38px,4vw,52px)] font-bold leading-none tracking-[-0.02em] text-gold">{b.stat}</span>
+                    <span className="mt-1.5 text-[13px] font-medium uppercase tracking-[0.12em] text-[#94a3b8]">{b.statLabel}</span>
+                  </p>
+                ) : (
+                  <span className="font-display text-[15px] font-bold text-gold" aria-hidden>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                )}
+                <h3 className={`m-0 font-display font-bold ${b.wide ? "text-[24px]" : "text-[20px]"}`}>{b.title}</h3>
+                <p className={`m-0 text-[#cbd5e1] ${b.wide ? "max-w-[46ch] text-[16.5px]" : "text-[15.5px]"}`}>{b.body}</p>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-navy-line pt-8">
+            <p className="m-0 font-display text-[19px] font-semibold">One-off build. Optional hosting from {hostingPlan.price}.</p>
+            <div className="flex flex-wrap gap-3">
+              <a href="#packages" className="btn btn-gold">
+                See packages
+              </a>
+              <a href="#contact" className="btn btn-outline-light">
+                Talk to Steve
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -290,15 +348,45 @@ export default async function HomePage() {
               );
             })}
           </div>
-          <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-line bg-white px-6 py-5">
-            <div className="flex flex-col gap-1">
-              <strong className="font-display">Hosting and care plan, from {carePlan.price}</strong>
-              <span className="text-[15.5px] text-muted">{carePlan.body}</span>
+          {/* Payment options */}
+          <div className="flex flex-col gap-4 rounded-2xl border-2 border-gold bg-white p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+            <div className="flex items-start gap-4">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-ink text-gold" aria-hidden>
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="5" width="18" height="15" rx="2" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                  <line x1="8" y1="3" x2="8" y2="7" />
+                  <line x1="16" y1="3" x2="16" y2="7" />
+                </svg>
+              </span>
+              <div className="flex flex-col gap-1">
+                <strong className="font-display text-[19px]">{spreadCost.title}</strong>
+                <span className="max-w-[60ch] text-[15.5px] text-muted">{spreadCost.body}</span>
+              </div>
             </div>
-            <a href="#contact" className="font-bold text-blue no-underline hover:underline">
-              Ask about care plans <span aria-hidden>→</span>
+            <a href="#contact" className="btn btn-gold shrink-0">
+              Ask about payment options
             </a>
           </div>
+
+          {/* Monthly plans */}
+          <div className="grid gap-5 md:grid-cols-2">
+            {[
+              { name: "Hosting only", price: hostingPlan.price, body: hostingPlan.body, featured: false },
+              { name: "Hosting and care", price: carePlan.price, body: carePlan.body, featured: true },
+            ].map((plan) => (
+              <div key={plan.name} className={`flex flex-col gap-2 rounded-2xl border bg-white px-6 py-5 ${plan.featured ? "border-blue" : "border-line"}`}>
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <strong className="font-display text-[18px]">{plan.name}</strong>
+                  <span className="font-display text-[22px] font-bold text-blue">{plan.price}</span>
+                </div>
+                <span className="text-[15.5px] text-muted">{plan.body}</span>
+              </div>
+            ))}
+          </div>
+          <p className="m-0 text-sm text-muted">
+            Monthly plans are optional and cancel any time with a month&apos;s notice. Prefer to host it yourself? Your site and its code are handed over to you.
+          </p>
         </div>
       </section>
 

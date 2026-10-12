@@ -17,12 +17,26 @@ export type FaqView = { q: string; a: string };
 export type SiteContent = {
   business: Business;
   carePlan: { price: string; body: string };
+  hostingPlan: { price: string; body: string };
+  spreadCost: { title: string; body: string };
   packages: PackageView[];
   portfolio: ProjectView[];
   faqs: FaqView[];
 };
 
-export const settingKeys = ["email", "phone", "address", "area", "reply_time", "care_plan_price", "care_plan_body"] as const;
+export const settingKeys = [
+  "email",
+  "phone",
+  "address",
+  "area",
+  "reply_time",
+  "care_plan_price",
+  "care_plan_body",
+  "hosting_price",
+  "hosting_body",
+  "spread_title",
+  "spread_body",
+] as const;
 export type SettingKey = (typeof settingKeys)[number];
 
 function contactHrefs(email: string, phone: string) {
@@ -40,6 +54,8 @@ export const getSiteContent = cache(async function getSiteContent(): Promise<Sit
   const base: SiteContent = {
     business: fallback.business,
     carePlan: fallback.carePlan,
+    hostingPlan: fallback.hostingPlan,
+    spreadCost: fallback.spreadCost,
     packages: fallback.packages,
     portfolio: fallback.portfolio,
     faqs: fallback.faqs,
@@ -68,6 +84,8 @@ export const getSiteContent = cache(async function getSiteContent(): Promise<Sit
         replyTime: settings.reply_time ?? base.business.replyTime,
       },
       carePlan: { price: settings.care_plan_price ?? base.carePlan.price, body: settings.care_plan_body ?? base.carePlan.body },
+      hostingPlan: { price: settings.hosting_price || base.hostingPlan.price, body: settings.hosting_body || base.hostingPlan.body },
+      spreadCost: { title: settings.spread_title || base.spreadCost.title, body: settings.spread_body || base.spreadCost.body },
       packages: pkgs.length
         ? pkgs
             .filter((p): p is typeof p & { id: PackageView["id"] } => ["bronze", "silver", "gold"].includes(p.id))

@@ -79,7 +79,11 @@ SELECT * FROM (VALUES
   ('area', 'North Yorkshire, working UK-wide'),
   ('reply_time', '[1 working day]'),
   ('care_plan_price', '£[PRICE]/month'),
-  ('care_plan_body', 'Secure hosting, updates, backups and small content changes, all looked after for you.')
+  ('care_plan_body', 'Everything in Hosting, plus software updates, backups, uptime checks and up to 30 minutes of changes a month.'),
+  ('hosting_price', '£5/month'),
+  ('hosting_body', 'Fast, secure hosting with a security certificate and your domain renewal included. Changes are charged only when you need them.'),
+  ('spread_title', 'Spread the cost'),
+  ('spread_body', 'Pay a deposit to get started, then the rest in up to 6 interest-free monthly payments. Your website is yours once the last payment is made.')
 ) AS v(key, value)
 WHERE NOT EXISTS (SELECT 1 FROM "site_settings");
 INSERT INTO "packages" ("id", "name", "intro", "price", "badge", "items", "sort_order")
