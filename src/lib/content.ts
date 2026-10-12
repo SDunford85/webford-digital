@@ -74,7 +74,14 @@ export const getSiteContent = cache(async function getSiteContent(): Promise<Sit
             .map((p) => ({ id: p.id, name: p.name, intro: p.intro, price: p.price, items: p.items, badge: p.badge ?? undefined }))
         : base.packages,
       portfolio: projects.length
-        ? projects.map((p) => ({ name: p.name, summary: p.summary, tags: p.tags, url: p.url || "#", image: p.imageUrl || null }))
+        ? projects.map((p) => ({
+            name: p.name,
+            summary: p.summary,
+            tags: p.tags,
+            url: p.url || "#",
+            // No screenshot set in the admin yet? Use the built-in one for the same site, if there is one.
+            image: p.imageUrl || base.portfolio.find((d) => d.name.toLowerCase() === p.name.toLowerCase())?.image || null,
+          }))
         : (await db.$count(schema.projects)) > 0
           ? [] // everything hidden on purpose
           : base.portfolio,

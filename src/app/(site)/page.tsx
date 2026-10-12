@@ -1,5 +1,7 @@
 import { AdminPreview } from "@/components/AdminPreview";
 import { EnquiryForm } from "@/components/EnquiryForm";
+import { HeroShowcase } from "@/components/HeroShowcase";
+import { LogoMark } from "@/components/Logo";
 import { Check, Icon } from "@/components/Icon";
 import { comparison, features, sellingPoints, steps } from "@/content/site";
 import { getSiteContent } from "@/lib/content";
@@ -8,6 +10,7 @@ const dot: Record<string, string> = { bronze: "bg-[#a86b3c]", silver: "bg-[#9ca3
 
 export default async function HomePage() {
   const { business, carePlan, faqs, packages, portfolio } = await getSiteContent();
+  const showcase = portfolio.filter((p): p is typeof p & { image: string } => Boolean(p.image));
   return (
     <>
       {/* ---------- Hero ---------- */}
@@ -32,31 +35,13 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-2xl border border-ink-line bg-ink-2" aria-hidden>
-            <div className="flex gap-2 border-b border-ink-line px-4 py-3.5">
-              <span className="h-[11px] w-[11px] rounded-full bg-[#3a4150]" />
-              <span className="h-[11px] w-[11px] rounded-full bg-[#3a4150]" />
-              <span className="h-[11px] w-[11px] rounded-full bg-gold" />
+          {showcase.length > 0 ? (
+            <HeroShowcase projects={showcase} />
+          ) : (
+            <div className="flex aspect-[16/10] items-center justify-center rounded-2xl border border-ink-line bg-ink-2" aria-hidden>
+              <LogoMark tone="light" className="h-24 w-auto opacity-80" />
             </div>
-            {/* [Swap for real screenshots of your sites once you have them] */}
-            <div className="grid grid-cols-2 gap-3 p-4 sm:p-5">
-              {portfolio.map((p, i) => (
-                <div
-                  key={p.name}
-                  className={`flex aspect-[4/3] flex-col justify-end rounded-xl p-4 ${
-                    ["bg-blue", "bg-[#1f2937]", "bg-navy", "bg-[#20242e]"][i % 4]
-                  } ${i === 0 ? "ring-2 ring-gold" : ""}`}
-                >
-                  <span className="mb-auto flex flex-col gap-1.5">
-                    <span className="h-1.5 w-1/2 rounded-full bg-white/30" />
-                    <span className="h-1.5 w-1/3 rounded-full bg-white/20" />
-                  </span>
-                  <span className="font-display text-base font-bold sm:text-lg">{p.name}</span>
-                  <span className="text-xs text-white/70">{p.tags[0]}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          )}
         </div>
       </section>
 
