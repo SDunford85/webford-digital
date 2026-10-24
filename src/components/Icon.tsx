@@ -76,6 +76,37 @@ export function Icon({ name, className = "h-7 w-7" }: { name: IconName; classNam
           <line x1="12" y1="5" x2="12" y2="20" />
         </svg>
       );
+    case "globe":
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="9" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18z" />
+        </svg>
+      );
+    case "shield":
+      return (
+        <svg {...common}>
+          <path d="M12 3l8 3v6c0 4.5-3.4 8-8 9c-4.6-1-8-4.5-8-9V6z" />
+          <polyline points="8.5,12 11,14.5 15.5,10" />
+        </svg>
+      );
+    case "mail":
+      return (
+        <svg {...common}>
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <polyline points="3,7 12,13 21,7" />
+        </svg>
+      );
+    case "move":
+      return (
+        <svg {...common}>
+          <rect x="2" y="6" width="8" height="12" rx="1.5" />
+          <rect x="14" y="6" width="8" height="12" rx="1.5" />
+          <line x1="7" y1="12" x2="17" y2="12" />
+          <polyline points="14,9 17,12 14,15" />
+        </svg>
+      );
   }
 }
 

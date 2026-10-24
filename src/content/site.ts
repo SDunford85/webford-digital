@@ -43,7 +43,7 @@ export const comparison: { label: string; template: string; webford: string }[] 
   { label: "Guidance", template: "General how-to articles", webford: "A user guide written for your site" },
 ];
 
-export type IconName = "code" | "sliders" | "gallery" | "chat" | "cart" | "link" | "embed" | "book";
+export type IconName = "code" | "sliders" | "gallery" | "chat" | "cart" | "link" | "embed" | "book" | "globe" | "shield" | "mail" | "move";
 
 export const features: { icon: IconName; title: string; body: string }[] = [
   { icon: "code", title: "Custom-built websites", body: "Hand-coded, fast and mobile-friendly, designed around your brand and customers." },
@@ -125,6 +125,8 @@ export const packages: Package[] = [
       "Photo gallery",
       "Embedded maps, videos and social links",
       "Basic SEO set-up",
+      "Your domain name, registered to you (first year included)",
+      "Email forwarding, e.g. hello@yourbusiness.co.uk",
       "User guide",
       "[30] days post-launch support",
     ],
@@ -141,6 +143,7 @@ export const packages: Package[] = [
       "Virtual agent for your FAQs",
       "Links and embeds for your external apps",
       "Visitor analytics",
+      "Move your existing site and domain to us",
       "Personal handover session",
       "[60] days post-launch support",
     ],
@@ -158,6 +161,7 @@ export const packages: Package[] = [
       "Sales and booking reports",
       "API integrations with your systems",
       "Customer accounts",
+      "Business email set-up",
       "Detailed user guide and training",
       "[90] days post-launch support",
     ],
@@ -171,8 +175,16 @@ export const carePlan = {
 
 export const hostingPlan = {
   price: "£5/month",
-  body: "Fast, secure hosting with a security certificate and your domain renewal included. Changes are charged only when you need them.",
+  body: "Fast, secure hosting with a security certificate, your domain renewal and email forwarding included. Changes are charged only when you need them.",
 };
+
+/** "Everything in one place": domains, hosting, email and moving from another provider. */
+export const oneStop: { icon: IconName; title: string; body: string }[] = [
+  { icon: "globe", title: "Your domain name", body: "Chosen together and registered in your business’s name, with the first year included. Already have one? I’ll look after it or move it across." },
+  { icon: "shield", title: "Hosting and security", body: "Fast, secure hosting with a security certificate, so the padlock shows in every browser. From £5 a month." },
+  { icon: "mail", title: "Business email", body: "Email forwarding included, so hello@yourbusiness.co.uk lands in the inbox you already use. Full mailboxes set up on request." },
+  { icon: "move", title: "Moving made easy", body: "Switching from Wix, GoDaddy or another provider? I move your site and domain carefully, so your email keeps working throughout." },
+];
 
 export const spreadCost = {
   title: "Spread the cost",
@@ -195,8 +207,11 @@ export const faqs = [
   { q: "How much does a website cost?", a: "Packages start from £[PRICE]. After a free chat you’ll get a fixed quote, so there are no surprises." },
   { q: "How long does a build take?", a: "Typically [X–Y] weeks, depending on the package and how quickly content is ready." },
   { q: "Can I update the website myself?", a: "Yes. Silver and Gold include an admin site, and every build comes with a user guide." },
-  { q: "Will I own my website and domain?", a: "Yes. Once paid in full, the site and domain are yours. [Confirm wording in your terms.]" },
-  { q: "Do you offer hosting and support?", a: "Yes, through an optional monthly care plan covering hosting, updates and small changes." },
+  { q: "Will I own my website and domain?", a: "Yes. Your domain is always registered in your business’s name, and once the build is paid for, the website is yours too. If you ever leave, I’ll transfer the domain and hand over your site’s code and content." },
+  { q: "Do I need to sort out my own domain and hosting?", a: "No, I handle it all. I’ll help you choose a domain, register it in your name (the first year is included), and host your site from £5 a month, with renewals included." },
+  { q: "I already have a website and domain. Can you take it over?", a: "Yes. You can keep your domain where it is and I’ll point it to your new site, or move it across so everything is in one place and one bill. I check your email settings first, so nothing stops working during the switch." },
+  { q: "Can I have a business email address?", a: "Yes. Every site includes email forwarding, so messages to hello@yourbusiness.co.uk arrive in the inbox you already use. If you need full mailboxes, I can set up Google Workspace or a lower-cost alternative for you." },
+  { q: "Do you offer hosting and support?", a: "Yes. Hosting only is £5 a month, or choose the care plan for updates, backups and small changes each month. Both are optional and cancel with a month’s notice." },
 ];
 
 export const enquiryNeeds = ["New website", "Redesign of my current site", "Online shop", "Bookings or appointments", "Not sure yet"];

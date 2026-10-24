@@ -3,7 +3,7 @@ import { EnquiryForm } from "@/components/EnquiryForm";
 import { HeroShowcase } from "@/components/HeroShowcase";
 import { LogoMark } from "@/components/Logo";
 import { Check, Icon } from "@/components/Icon";
-import { benefits, comparison, features, sellingPoints, steps } from "@/content/site";
+import { benefits, comparison, features, oneStop, sellingPoints, steps } from "@/content/site";
 import { getSiteContent } from "@/lib/content";
 
 const dot: Record<string, string> = { bronze: "bg-[#a86b3c]", silver: "bg-[#9ca3af]", gold: "bg-gold" };
@@ -348,6 +348,26 @@ export default async function HomePage() {
               );
             })}
           </div>
+          {/* Everything in one place: domain, hosting, email, moving */}
+          <div className="flex flex-col gap-6 rounded-[18px] bg-ink p-7 text-white sm:p-9">
+            <div className="flex flex-col gap-2">
+              <p className="kicker m-0 text-gold">One supplier, no loose ends</p>
+              <h3 className="m-0 font-display text-[26px] font-bold leading-tight">Domain, hosting and email, all sorted.</h3>
+              <p className="m-0 max-w-[62ch] text-muted-dark">No juggling three companies and three bills. I set it all up, keep it running, and it’s always registered to you.</p>
+            </div>
+            <ul className="m-0 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-4">
+              {oneStop.map((o) => (
+                <li key={o.title} className="flex flex-col gap-2.5 rounded-2xl border border-ink-line bg-ink-2 p-5">
+                  <span className="text-gold">
+                    <Icon name={o.icon} className="h-7 w-7" />
+                  </span>
+                  <strong className="font-display text-[17px]">{o.title}</strong>
+                  <span className="text-[15px] text-muted-dark">{o.body}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Payment options */}
           <div className="flex flex-col gap-4 rounded-2xl border-2 border-gold bg-white p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
             <div className="flex items-start gap-4">

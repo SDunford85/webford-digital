@@ -81,16 +81,16 @@ SELECT * FROM (VALUES
   ('care_plan_price', '£[PRICE]/month'),
   ('care_plan_body', 'Everything in Hosting, plus software updates, backups, uptime checks and up to 30 minutes of changes a month.'),
   ('hosting_price', '£5/month'),
-  ('hosting_body', 'Fast, secure hosting with a security certificate and your domain renewal included. Changes are charged only when you need them.'),
+  ('hosting_body', 'Fast, secure hosting with a security certificate, your domain renewal and email forwarding included. Changes are charged only when you need them.'),
   ('spread_title', 'Spread the cost'),
   ('spread_body', 'Pay a deposit to get started, then the rest in up to 6 interest-free monthly payments. Your website is yours once the last payment is made.')
 ) AS v(key, value)
 WHERE NOT EXISTS (SELECT 1 FROM "site_settings");
 INSERT INTO "packages" ("id", "name", "intro", "price", "badge", "items", "sort_order")
 SELECT * FROM (VALUES
-  ('bronze', 'Bronze', 'A professional presence for sole traders and new businesses.', '£[PRICE]', NULL, ARRAY['Bespoke design, up to [5] pages', 'Mobile-friendly and fast', 'Enquiry form to your inbox', 'Photo gallery', 'Embedded maps, videos and social links', 'Basic SEO set-up', 'User guide', '[30] days post-launch support']::text[], 0),
-  ('silver', 'Silver', 'For growing businesses that want to manage their own site and take bookings.', '£[PRICE]', NULL, ARRAY['Everything in Bronze, up to [10] pages', 'Admin site for instant updates', 'Online bookings or appointments', 'Virtual agent for your FAQs', 'Links and embeds for your external apps', 'Visitor analytics', 'Personal handover session', '[60] days post-launch support']::text[], 1),
-  ('gold', 'Gold', 'A full online shop or business system, built and connected end to end.', '£[PRICE]', 'Most complete', ARRAY['Everything in Silver, pages to suit', 'Full e-commerce with card payments', 'Product, stock and order management', 'Sales and booking reports', 'API integrations with your systems', 'Customer accounts', 'Detailed user guide and training', '[90] days post-launch support']::text[], 2)
+  ('bronze', 'Bronze', 'A professional presence for sole traders and new businesses.', '£[PRICE]', NULL, ARRAY['Bespoke design, up to [5] pages', 'Mobile-friendly and fast', 'Enquiry form to your inbox', 'Photo gallery', 'Embedded maps, videos and social links', 'Basic SEO set-up', 'Your domain name, registered to you (first year included)', 'Email forwarding, e.g. hello@yourbusiness.co.uk', 'User guide', '[30] days post-launch support']::text[], 0),
+  ('silver', 'Silver', 'For growing businesses that want to manage their own site and take bookings.', '£[PRICE]', NULL, ARRAY['Everything in Bronze, up to [10] pages', 'Admin site for instant updates', 'Online bookings or appointments', 'Virtual agent for your FAQs', 'Links and embeds for your external apps', 'Visitor analytics', 'Move your existing site and domain to us', 'Personal handover session', '[60] days post-launch support']::text[], 1),
+  ('gold', 'Gold', 'A full online shop or business system, built and connected end to end.', '£[PRICE]', 'Most complete', ARRAY['Everything in Silver, pages to suit', 'Full e-commerce with card payments', 'Product, stock and order management', 'Sales and booking reports', 'API integrations with your systems', 'Customer accounts', 'Business email set-up', 'Detailed user guide and training', '[90] days post-launch support']::text[], 2)
 ) AS v
 WHERE NOT EXISTS (SELECT 1 FROM "packages");
 INSERT INTO "projects" ("name", "summary", "tags", "url", "image_url", "sort_order")
@@ -106,8 +106,11 @@ SELECT * FROM (VALUES
   ('How much does a website cost?', 'Packages start from £[PRICE]. After a free chat you’ll get a fixed quote, so there are no surprises.', 0),
   ('How long does a build take?', 'Typically [X–Y] weeks, depending on the package and how quickly content is ready.', 1),
   ('Can I update the website myself?', 'Yes. Silver and Gold include an admin site, and every build comes with a user guide.', 2),
-  ('Will I own my website and domain?', 'Yes. Once paid in full, the site and domain are yours. [Confirm wording in your terms.]', 3),
-  ('Do you offer hosting and support?', 'Yes, through an optional monthly care plan covering hosting, updates and small changes.', 4)
+  ('Will I own my website and domain?', 'Yes. Your domain is always registered in your business’s name, and once the build is paid for, the website is yours too. If you ever leave, I’ll transfer the domain and hand over your site’s code and content.', 3),
+  ('Do I need to sort out my own domain and hosting?', 'No, I handle it all. I’ll help you choose a domain, register it in your name (the first year is included), and host your site from £5 a month, with renewals included.', 4),
+  ('I already have a website and domain. Can you take it over?', 'Yes. You can keep your domain where it is and I’ll point it to your new site, or move it across so everything is in one place and one bill. I check your email settings first, so nothing stops working during the switch.', 5),
+  ('Can I have a business email address?', 'Yes. Every site includes email forwarding, so messages to hello@yourbusiness.co.uk arrive in the inbox you already use. If you need full mailboxes, I can set up Google Workspace or a lower-cost alternative for you.', 6),
+  ('Do you offer hosting and support?', 'Yes. Hosting only is £5 a month, or choose the care plan for updates, backups and small changes each month. Both are optional and cancel with a month’s notice.', 7)
 ) AS v
 WHERE NOT EXISTS (SELECT 1 FROM "faqs");
 
