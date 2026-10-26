@@ -19,7 +19,7 @@ export const business = {
   phone: "[your number]",
   phoneHref: "tel:",
   address: "[Business address]",
-  area: "North Yorkshire, working UK-wide",
+  area: "Anywhere in the UK, by video call, phone and email",
   replyTime: "[1 working day]",
 };
 
@@ -211,6 +211,7 @@ export const faqs = [
   { q: "Do I need to sort out my own domain and hosting?", a: "No, I handle it all. I’ll help you choose a domain, register it in your name (the first year is included), and host your site from £5 a month, with renewals included." },
   { q: "I already have a website and domain. Can you take it over?", a: "Yes. You can keep your domain where it is and I’ll point it to your new site, or move it across so everything is in one place and one bill. I check your email settings first, so nothing stops working during the switch." },
   { q: "Can I have a business email address?", a: "Yes. Every site includes email forwarding, so messages to hello@yourbusiness.co.uk arrive in the inbox you already use. If you need full mailboxes, I can set up Google Workspace or a lower-cost alternative for you." },
+  { q: "Do you only work with local businesses?", a: "No. I work with businesses anywhere in the UK. Everything runs smoothly by video call, phone and email, and you get the same one-to-one service wherever you are." },
   { q: "Do you offer hosting and support?", a: "Yes. Hosting only is £5 a month, or choose the care plan for updates, backups and small changes each month. Both are optional and cancel with a month’s notice." },
 ];
 

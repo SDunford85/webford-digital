@@ -17,7 +17,7 @@ export default async function HomePage() {
       <section id="top" className="bg-ink text-white">
         <div className="container-wf grid items-center gap-14 px-4 pb-24 pt-16 sm:px-6 lg:grid-cols-2 lg:pt-20">
           <div className="flex flex-col gap-6">
-            <p className="kicker m-0 text-gold">Bespoke web design · North Yorkshire</p>
+            <p className="kicker m-0 text-gold">Bespoke web design · UK-wide</p>
             <h1 className="m-0 font-display text-[clamp(38px,5vw,60px)] font-bold leading-[1.08] tracking-[-0.02em]">
               Websites built around your business, not a template.
             </h1>
@@ -484,7 +484,7 @@ export default async function HomePage() {
               </dd>
               <dt className="font-bold">Phone</dt>
               <dd className="m-0">{business.phone}</dd>
-              <dt className="font-bold">Based in</dt>
+              <dt className="font-bold">Where I work</dt>
               <dd className="m-0">{business.area}</dd>
             </dl>
           </div>

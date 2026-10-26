@@ -76,7 +76,7 @@ SELECT * FROM (VALUES
   ('email', 'hello@[yourdomain].co.uk'),
   ('phone', '[your number]'),
   ('address', '[Business address]'),
-  ('area', 'North Yorkshire, working UK-wide'),
+  ('area', 'Anywhere in the UK, by video call, phone and email'),
   ('reply_time', '[1 working day]'),
   ('care_plan_price', '£[PRICE]/month'),
   ('care_plan_body', 'Everything in Hosting, plus software updates, backups, uptime checks and up to 30 minutes of changes a month.'),
@@ -110,7 +110,8 @@ SELECT * FROM (VALUES
   ('Do I need to sort out my own domain and hosting?', 'No, I handle it all. I’ll help you choose a domain, register it in your name (the first year is included), and host your site from £5 a month, with renewals included.', 4),
   ('I already have a website and domain. Can you take it over?', 'Yes. You can keep your domain where it is and I’ll point it to your new site, or move it across so everything is in one place and one bill. I check your email settings first, so nothing stops working during the switch.', 5),
   ('Can I have a business email address?', 'Yes. Every site includes email forwarding, so messages to hello@yourbusiness.co.uk arrive in the inbox you already use. If you need full mailboxes, I can set up Google Workspace or a lower-cost alternative for you.', 6),
-  ('Do you offer hosting and support?', 'Yes. Hosting only is £5 a month, or choose the care plan for updates, backups and small changes each month. Both are optional and cancel with a month’s notice.', 7)
+  ('Do you only work with local businesses?', 'No. I work with businesses anywhere in the UK. Everything runs smoothly by video call, phone and email, and you get the same one-to-one service wherever you are.', 7),
+  ('Do you offer hosting and support?', 'Yes. Hosting only is £5 a month, or choose the care plan for updates, backups and small changes each month. Both are optional and cancel with a month’s notice.', 8)
 ) AS v
 WHERE NOT EXISTS (SELECT 1 FROM "faqs");
 

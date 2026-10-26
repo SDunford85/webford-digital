@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     template: "%s · Hexford Digital",
   },
   description:
-    "Bespoke, hand-built websites for small businesses and sole traders, from someone with 10+ years in IT and software. Online shops, bookings, admin sites you can update yourself, and a real person to talk to. Based in North Yorkshire.",
+    "Bespoke, hand-built websites for small businesses and sole traders, from someone with 10+ years in IT and software. Online shops, bookings, admin sites you can update yourself, and a real person to talk to. Working with businesses across the UK.",
   openGraph: {
     siteName: "Hexford Digital",
     locale: "en_GB",
