@@ -27,7 +27,7 @@ export async function notifyNewEnquiry(e: EnquiryEmail) {
   const key = process.env.RESEND_API_KEY;
   const to = process.env.ENQUIRY_EMAIL_TO;
   if (!key || !to) return;
-  const from = process.env.ENQUIRY_EMAIL_FROM || "Webford website <onboarding@resend.dev>";
+  const from = process.env.ENQUIRY_EMAIL_FROM || "Hexford Digital website <onboarding@resend.dev>";
   const site = process.env.NEXT_PUBLIC_SITE_URL ?? "";
 
   const rows: [string, string | null][] = [

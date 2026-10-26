@@ -46,7 +46,7 @@ export default async function HomePage() {
       </section>
 
       {/* ---------- Selling points ---------- */}
-      <section aria-label="Why choose Webford" className="bg-blue text-white">
+      <section aria-label="Why choose Hexford" className="bg-blue text-white">
         <div className="container-wf px-4 py-7 sm:px-6">
           <ul className="m-0 grid list-none gap-4 p-0 font-medium sm:grid-cols-2 lg:grid-cols-4">
             {sellingPoints.map((s) => (
@@ -59,14 +59,14 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ---------- Why Webford: rent vs own ---------- */}
+      {/* ---------- Why Hexford: rent vs own ---------- */}
       <section id="why" aria-labelledby="why-h" className="relative overflow-hidden bg-navy text-white">
         {/* Large faint woven W, purely decorative */}
         <LogoMark tone="light" className="pointer-events-none absolute -right-24 -top-10 h-[520px] w-auto opacity-[0.05]" />
         <div className="container-wf relative px-4 py-24 sm:px-6">
           <div className="grid items-end gap-6 lg:grid-cols-[7fr_5fr]">
             <div className="flex flex-col gap-3.5">
-              <p className="kicker m-0 text-gold">Why Webford</p>
+              <p className="kicker m-0 text-gold">Why Hexford</p>
               <h2 id="why-h" className="m-0 font-display text-[clamp(34px,4.6vw,56px)] font-bold leading-[1.05] tracking-[-0.02em]">
                 Don&apos;t rent a website.
                 <br />
@@ -74,7 +74,7 @@ export default async function HomePage() {
               </h2>
             </div>
             <p className="m-0 text-[17px] text-[#cbd5e1] lg:pb-2">
-              Template builders charge you every month, for as long as you want to stay online, and the bill grows with every feature you add. A Webford site is
+              Template builders charge you every month, for as long as you want to stay online, and the bill grows with every feature you add. A Hexford site is
               built for you, then it&apos;s yours.
             </p>
           </div>
@@ -130,7 +130,7 @@ export default async function HomePage() {
               Here’s the difference.
             </p>
           </div>
-          {/* Phones: one card per row so the Webford answer is always visible */}
+          {/* Phones: one card per row so the Hexford answer is always visible */}
           <ul className="m-0 flex list-none flex-col gap-3 p-0 md:hidden">
             {comparison.map((row) => (
               <li key={row.label} className="overflow-hidden rounded-2xl border border-line bg-white">
@@ -143,7 +143,7 @@ export default async function HomePage() {
                 <div className="flex items-start gap-2.5 bg-blue-tint px-5 py-3 text-[15.5px]">
                   <Check className="mt-0.5 h-5 w-5 shrink-0 text-blue" />
                   <span>
-                    <span className="font-bold">Webford:</span> {row.webford}
+                    <span className="font-bold">Hexford:</span> {row.ours}
                   </span>
                 </div>
               </li>
@@ -160,7 +160,7 @@ export default async function HomePage() {
                     Template website builders
                   </th>
                   <th scope="col" className="border-b border-line bg-ink px-5 py-4 font-display text-white">
-                    Webford Digital Services
+                    Hexford Digital
                   </th>
                 </tr>
               </thead>
@@ -174,7 +174,7 @@ export default async function HomePage() {
                         {row.label}
                       </th>
                       <td className={`px-5 py-4 text-muted ${b}`}>{row.template}</td>
-                      <td className={`bg-blue-tint px-5 py-4 ${b}`}>{row.webford}</td>
+                      <td className={`bg-blue-tint px-5 py-4 ${b}`}>{row.ours}</td>
                     </tr>
                   );
                 })}
@@ -427,7 +427,7 @@ export default async function HomePage() {
               listening first, understanding how a business really works, and building something that fits.
             </p>
             <p className="m-0 text-muted">
-              Webford Digital Services brings that same approach to small businesses and sole traders. When you work with me, you deal with me from the first chat to
+              Hexford Digital brings that same approach to small businesses and sole traders. When you work with me, you deal with me from the first chat to
               launch day and beyond.
             </p>
             <p className="m-0 font-display font-semibold text-blue">Steve Dunford, founder</p>

@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
-/* Webford Digital Services design tokens — from the approved wireframe */
+/* Hexford Digital design tokens — from the approved wireframe */
 @theme {
   --color-ink: #0b0d12; /* black */
   --color-ink-2: #161a23; /* raised dark panel */
   --color-ink-line: #2a303c; /* borders on dark */
   --color-navy: #0c1a3a;
   --color-navy-line: #2b3b63;
-  --color-blue: #1846c8; /* Webford blue — buttons, links, highlights */
+  --color-blue: #1846c8; /* Hexford blue — buttons, links, highlights */
   --color-blue-dark: #0f3299;
   --color-blue-light: #4c7bf4; /* for the logo and icons on black */
   --color-blue-tint: #f2f5fd;

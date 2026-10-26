@@ -6,7 +6,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-ink-line bg-ink/95 text-white backdrop-blur">
       <div className="container-wf flex items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        <Link href="/" aria-label="Webford Digital Services home" className="no-underline">
+        <Link href="/" aria-label="Hexford Digital home" className="no-underline">
           <Logo onDark />
         </Link>
 

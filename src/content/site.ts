@@ -1,5 +1,5 @@
 /**
- * Site-wide content for Webford Digital Services.
+ * Site-wide content for Hexford Digital.
  * Anything in [SQUARE BRACKETS] still needs filling in before launch.
  * (Phase 2 moves packages, portfolio and FAQs into the admin site.)
  */
@@ -12,7 +12,7 @@
 export const allowIndexing = false;
 
 export const business = {
-  name: "Webford Digital Services",
+  name: "Hexford Digital",
   owner: "Steve Dunford",
   email: "hello@[yourdomain].co.uk",
   emailHref: "mailto:hello@[yourdomain].co.uk",
@@ -24,7 +24,7 @@ export const business = {
 };
 
 export const nav = [
-  { href: "/#why", label: "Why Webford" },
+  { href: "/#why", label: "Why Hexford" },
   { href: "/#services", label: "Services" },
   { href: "/#work", label: "Our work" },
   { href: "/#packages", label: "Packages" },
@@ -34,13 +34,13 @@ export const nav = [
 
 export const sellingPoints = ["10+ years in IT and software", "Hand-built, never a template", "You own your website", "Fair, fixed quotes"];
 
-export const comparison: { label: string; template: string; webford: string }[] = [
-  { label: "Design", template: "Pick a theme, fill the gaps", webford: "Designed from scratch for your brand" },
-  { label: "Features", template: "Limited by your plan tier", webford: "Built to do what your business needs" },
-  { label: "Making updates", template: "A generic editor for every site", webford: "Your own admin area, changes go live instantly" },
-  { label: "Integrations", template: "Only approved apps and plug-ins", webford: "Payments, booking systems and APIs connected properly" },
-  { label: "Support", template: "Help centre and ticket queues", webford: "Talk directly to the person who built it" },
-  { label: "Guidance", template: "General how-to articles", webford: "A user guide written for your site" },
+export const comparison: { label: string; template: string; ours: string }[] = [
+  { label: "Design", template: "Pick a theme, fill the gaps", ours: "Designed from scratch for your brand" },
+  { label: "Features", template: "Limited by your plan tier", ours: "Built to do what your business needs" },
+  { label: "Making updates", template: "A generic editor for every site", ours: "Your own admin area, changes go live instantly" },
+  { label: "Integrations", template: "Only approved apps and plug-ins", ours: "Payments, booking systems and APIs connected properly" },
+  { label: "Support", template: "Help centre and ticket queues", ours: "Talk directly to the person who built it" },
+  { label: "Guidance", template: "General how-to articles", ours: "A user guide written for your site" },
 ];
 
 export type IconName = "code" | "sliders" | "gallery" | "chat" | "cart" | "link" | "embed" | "book" | "globe" | "shield" | "mail" | "move";
@@ -191,7 +191,7 @@ export const spreadCost = {
   body: "Pay a deposit to get started, then the rest in up to 6 interest-free monthly payments. Your website is yours once the last payment is made.",
 };
 
-/** "Why Webford": the reasons to choose a bespoke site. `stat` shows big in place of the number. */
+/** "Why Hexford": the reasons to choose a bespoke site. `stat` shows big in place of the number. */
 export const benefits: { title: string; body: string; stat?: string; statLabel?: string; wide?: boolean }[] = [
   { title: "Done for you", body: "No evenings wrestling a template. Tell me what you need, and I design and build it.", stat: "0", statLabel: "evenings lost to a template", wide: true },
   { title: "Built around your business", body: "Order rotas, date-range hire, bookings: features that fit how you work, not what a theme allows." },

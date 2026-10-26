@@ -43,7 +43,7 @@ export function AdminPreview() {
           [Screenshot: sales report from a real admin site you’ve built]
         </div>
       </div>
-      <figcaption className="sr-only">Illustration of a Webford admin site, showing a product list with prices and status.</figcaption>
+      <figcaption className="sr-only">Illustration of a Hexford admin site, showing a product list with prices and status.</figcaption>
     </figure>
   );
 }

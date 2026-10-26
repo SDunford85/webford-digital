@@ -1,6 +1,6 @@
-# Webford Digital Services website
+# Hexford Digital website
 
-The website for **Webford Digital Services**: bespoke websites with a personal service.
+The website for **Hexford Digital**: bespoke websites with a personal service.
 
 **Stack:** Next.js 16 on **Cloudflare Workers** (via OpenNext) · **Neon** Postgres with Drizzle ORM. Same setup as Strength Circus, WHEA GB and Bake Chic.
 
@@ -54,7 +54,7 @@ Both routes record the same migrations, so you can switch between them.
 | `ADMIN_SESSION_SECRET` | 32+ random characters. Generate one at a password generator, or run `node -e "console.log(crypto.randomUUID()+crypto.randomUUID())"` |
 | `RESEND_API_KEY` | *(optional, for email alerts)* from resend.com → API Keys |
 | `ENQUIRY_EMAIL_TO` | *(optional)* where alerts go. Until you verify your own domain in Resend, this must be the email address you signed up to Resend with |
-| `ENQUIRY_EMAIL_FROM` | *(optional)* leave unset to use `Webford website <onboarding@resend.dev>`; once your domain is verified in Resend, e.g. `Webford website <hello@yourdomain.co.uk>` |
+| `ENQUIRY_EMAIL_FROM` | *(optional)* leave unset to use `Hexford Digital website <onboarding@resend.dev>`; once your domain is verified in Resend, e.g. `Hexford Digital website <hello@yourdomain.co.uk>` |
 
 **Check:** open `/api/status` on the site. Everything should say `"set"` / `true` (it shows yes/no only, never the values). Then go to `/admin` and log in.
 
@@ -90,8 +90,19 @@ Copy `.env.example` to `.env` **and** `.dev.vars` and fill them in. The homepage
 |---|---|
 | Black | `#0B0D12` |
 | Navy | `#0C1A3A` |
-| Webford blue | `#1846C8` (lighter `#4C7BF4` for the logo on black) |
-| Gold | `#D4A72C`: fills, borders and text on dark backgrounds only. For gold-toned text on white use `#8A6510` |
-| Fonts | Sora Bold (headings, logo) · DM Sans (body) |
+| Hexford blue | `#1846C8` (lighter `#4C7BF4` on black) |
+| Gold | `#D4A72C`: logo, fills, borders and text on dark backgrounds. For gold-toned text on white use `#8A6510` |
+| Fonts | Saira (logo wordmark, outlined in the logo files) · Sora Bold (headings) · DM Sans (body) |
 
 Colours are defined once in `src/app/globals.css`.
+
+**Logo:** the gold circuit hexagon. Files are in `public/brand/` (SVG) and `public/brand/png/` (PNG):
+
+| File | Use it for |
+|---|---|
+| `hexford-logo.svg` / `…-2000w.png` | White backgrounds: documents, invoices, proposals |
+| `hexford-logo-reversed` | Navy or black backgrounds: the website, social banners |
+| `hexford-logo-white` | One-colour white, for photos or coloured backgrounds |
+| `hexford-logo-stacked…` | Square spaces: social profiles, signage (same three colourways) |
+| `hexford-icon…` | The hexagon on its own (gold for dark, navy for white, white) |
+| `hexford-icon-tile`, `hexford-favicon` | App icon and browser tab (the favicon is simplified for tiny sizes) |

@@ -101,7 +101,7 @@ export function EnquiryForm() {
         <div className="flex items-start gap-3 text-[14.5px] text-muted">
           <input id="f-consent" name="consent" type="checkbox" className="mt-0.5 h-5 w-5 shrink-0 accent-blue" {...err("consent")} />
           <label htmlFor="f-consent">
-            I’m happy for Webford Digital Services to contact me about my enquiry. See the <a href="/privacy" className="text-blue">Privacy policy</a>.
+            I’m happy for Hexford Digital to contact me about my enquiry. See the <a href="/privacy" className="text-blue">Privacy policy</a>.
           </label>
         </div>
         {e.consent ? (

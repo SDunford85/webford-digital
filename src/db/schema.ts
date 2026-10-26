@@ -1,7 +1,7 @@
 import { pgTable, pgEnum, text, timestamp, uuid, index, boolean, integer } from "drizzle-orm/pg-core";
 
 /*
- * Webford Digital Services database (Neon Postgres).
+ * Hexford Digital database (Neon Postgres).
  * Phase 1: enquiries from the contact form.
  * Phase 2 adds the content Steve edits from the admin site (packages, portfolio, FAQs).
  */
