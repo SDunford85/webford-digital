@@ -1,24 +1,22 @@
 /**
- * The Hexford Digital logo: a gold circuit hexagon (six sides, one for each of the family)
+ * The Hexford Digital logo: a hexagon globe (a honeycomb wrapped round a sphere, gold at its heart)
  * with the HEXFORD / DIGITAL wordmark. Same artwork as the files in /public/brand.
  */
-import { DIGITAL_CAP, DIGITAL_D, DIGITAL_W, HEXFORD_CAP, HEXFORD_D, HEXFORD_W, ICON_MARKUP } from "./brand-paths";
+import { DIGITAL_CAP, DIGITAL_D, DIGITAL_W, GLOBE_MARKUP, GLOBE_SMALL_MARKUP, GLOBE_WHITE_MARKUP, HEXFORD_CAP, HEXFORD_D, HEXFORD_W } from "./brand-paths";
 
 type Tone = "dark" | "light" | "mono-white";
 
-/** Colours for each tone. "dark" = artwork for white backgrounds; "light" = for black and navy backgrounds. */
-const tones: Record<Tone, { line: string; core: string; word: string; sub: string }> = {
-  dark: { line: "#0C1A3A", core: "#D4A72C", word: "#0C1A3A", sub: "#8A6510" },
-  light: { line: "#D4A72C", core: "#F2D27A", word: "#F2D27A", sub: "#C9D3EA" },
-  "mono-white": { line: "#FFFFFF", core: "#FFFFFF", word: "#FFFFFF", sub: "#FFFFFF" },
+/** Wordmark colours. "dark" = for white backgrounds; "light" = for black and navy backgrounds. */
+const tones: Record<Tone, { word: string; sub: string }> = {
+  dark: { word: "#0C1A3A", sub: "#8A6510" },
+  light: { word: "#FFFFFF", sub: "#E2B33A" },
+  "mono-white": { word: "#FFFFFF", sub: "#FFFFFF" },
 };
 
-type MarkProps = { className?: string; tone?: Tone; title?: string };
+type MarkProps = { className?: string; tone?: Tone; title?: string; /** Fewer, larger cells for sizes under ~64px. */ small?: boolean };
 
-/** The hexagon on its own. */
-export function LogoMark({ className = "h-8 w-auto", tone = "dark", title }: MarkProps) {
-  const t = tones[tone];
-  const markup = ICON_MARKUP.replaceAll("__LINE__", t.line).replaceAll("__CORE__", t.core);
+/** The globe on its own. Full colour works on both light and dark backgrounds. */
+export function LogoMark({ className = "h-8 w-auto", tone = "dark", title, small = false }: MarkProps) {
   return (
     <svg
       viewBox="0 0 100 100"
@@ -26,7 +24,7 @@ export function LogoMark({ className = "h-8 w-auto", tone = "dark", title }: Mar
       role={title ? "img" : undefined}
       aria-hidden={title ? undefined : true}
       aria-label={title}
-      dangerouslySetInnerHTML={{ __html: markup }}
+      dangerouslySetInnerHTML={{ __html: tone === "mono-white" ? GLOBE_WHITE_MARKUP : small ? GLOBE_SMALL_MARKUP : GLOBE_MARKUP }}
     />
   );
 }
@@ -50,12 +48,12 @@ export function Wordmark({ className = "h-9 w-auto", tone = "dark" }: { classNam
   );
 }
 
-/** Mark + wordmark. `onDark` switches colours for black and navy backgrounds. */
+/** Globe + wordmark. `onDark` switches the wordmark colours for black and navy backgrounds. */
 export function Logo({ onDark = false, className = "" }: { onDark?: boolean; className?: string }) {
   const tone: Tone = onDark ? "light" : "dark";
   return (
     <span className={`inline-flex items-center gap-3 ${className}`} role="img" aria-label="Hexford Digital">
-      <LogoMark tone={tone} className="h-11 w-11 shrink-0" />
+      <LogoMark tone={tone} small className="h-12 w-12 shrink-0" />
       <Wordmark tone={tone} className="h-[32px] w-auto" />
     </span>
   );

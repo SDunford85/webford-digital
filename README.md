@@ -96,7 +96,7 @@ Copy `.env.example` to `.env` **and** `.dev.vars` and fill them in. The homepage
 
 Colours are defined once in `src/app/globals.css`.
 
-**Logo:** the gold circuit hexagon. Files are in `public/brand/` (SVG) and `public/brand/png/` (PNG):
+**Logo:** the hexagon globe (bold rings): a honeycomb wrapped round a sphere, gold at its heart, blue round the edge. Six-sided cells, one for each of the family. Files are in `public/brand/` (SVG) and `public/brand/png/` (PNG):
 
 | File | Use it for |
 |---|---|
@@ -104,5 +104,5 @@ Colours are defined once in `src/app/globals.css`.
 | `hexford-logo-reversed` | Navy or black backgrounds: the website, social banners |
 | `hexford-logo-white` | One-colour white, for photos or coloured backgrounds |
 | `hexford-logo-stacked…` | Square spaces: social profiles, signage (same three colourways) |
-| `hexford-icon…` | The hexagon on its own (gold for dark, navy for white, white) |
+| `hexford-icon…` | The globe on its own (full colour works on dark and white; `-white` is one colour) |
 | `hexford-icon-tile`, `hexford-favicon` | App icon and browser tab (the favicon is simplified for tiny sizes) |
