@@ -1,6 +1,7 @@
 "use client";
 
-import { startTransition, useActionState } from "react";
+import { startTransition, useActionState, useEffect, useRef } from "react";
+import { PREFILL_EVENT, takeStoredPrefill, type Prefill } from "@/lib/prefill";
 import { sendEnquiry, type EnquiryState } from "@/app/(site)/actions";
 import { enquiryNeeds, packageChoices } from "@/content/site";
 
@@ -37,6 +38,28 @@ function Field({
 export function EnquiryForm() {
   const [state, action, pending] = useActionState(sendEnquiry, initial);
   const e = state.errors ?? {};
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Filled in from the quote calculator or the virtual assistant
+  useEffect(() => {
+    const fill = (p: Prefill) => {
+      const f = formRef.current;
+      if (!f) return;
+      const set = (name: string, v?: string) => {
+        const el = f.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | null;
+        if (el && v) el.value = v;
+      };
+      set("need", p.need);
+      set("packageInterest", p.packageInterest);
+      set("message", p.message);
+      (f.elements.namedItem("name") as HTMLInputElement | null)?.focus({ preventScroll: true });
+    };
+    const stored = takeStoredPrefill();
+    if (stored) fill(stored);
+    const onEvent = (ev: Event) => fill((ev as CustomEvent<Prefill>).detail);
+    window.addEventListener(PREFILL_EVENT, onEvent);
+    return () => window.removeEventListener(PREFILL_EVENT, onEvent);
+  }, []);
 
   if (state.ok) {
     return (
@@ -51,6 +74,7 @@ export function EnquiryForm() {
 
   return (
     <form
+      ref={formRef}
       action={action}
       onSubmit={(ev) => {
         // Submit ourselves so a validation error doesn't clear what the visitor has typed

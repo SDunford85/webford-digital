@@ -17,8 +17,8 @@ export function Header() {
               {n.label}
             </Link>
           ))}
-          <Link href="/#contact" className="btn btn-gold">
-            Start your project
+          <Link href="/#quote" className="btn btn-gold">
+            Get a quote
           </Link>
         </nav>
 
@@ -33,8 +33,11 @@ export function Header() {
                 {n.label}
               </Link>
             ))}
-            <Link href="/#contact" className="btn btn-gold mt-2">
-              Start your project
+            <Link href="/#quote" className="btn btn-gold mt-2">
+              Get a quote
+            </Link>
+            <Link href="/#contact" className="rounded-lg px-3 py-3 text-white no-underline hover:bg-ink">
+              Contact
             </Link>
           </nav>
         </details>

@@ -26,6 +26,7 @@ export async function GET() {
       ADMIN_SESSION_SECRET: secret ? (secret.length >= 32 ? "set" : "TOO SHORT (needs 32+ characters)") : "MISSING",
       RESEND_API_KEY: process.env.RESEND_API_KEY ? "set" : "not set (enquiry emails off)",
       ENQUIRY_EMAIL_TO: process.env.ENQUIRY_EMAIL_TO ? "set" : "not set (enquiry emails off)",
+      ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY ? "set (assistant uses AI)" : "not set (assistant uses built-in answers)",
     },
     { headers: { "Cache-Control": "no-store" } },
   );

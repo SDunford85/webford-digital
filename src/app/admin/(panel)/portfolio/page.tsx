@@ -20,6 +20,13 @@ function ProjectFields({ p, nextOrder }: { p?: ProjectRow; nextOrder?: number })
         hint="Address of the image, e.g. /images/work/bake-chic.webp (see the README). Leave empty for a placeholder."
         className="md:col-span-2"
       />
+      <Field
+        label="Before screenshot (optional)"
+        name="beforeImageUrl"
+        defaultValue={p?.beforeImageUrl}
+        hint="A screenshot of the client's old website, same size as the one above. Adds a drag-to-compare before-and-after slider on the Our work page."
+        className="md:col-span-2"
+      />
       <Field label="Order" name="sortOrder" type="number" defaultValue={p?.sortOrder ?? nextOrder ?? 0} hint="Lower numbers show first" />
       <Check label="Show on the website" name="published" defaultChecked={p?.published ?? true} />
     </div>

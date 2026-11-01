@@ -84,6 +84,21 @@ Copy `.env.example` to `.env` **and** `.dev.vars` and fill them in. The homepage
 - [ ] Test enquiry received, and the email alert arrives
 - [ ] `allowIndexing = true` in `src/content/site.ts`
 
+## Pages and features
+
+- **Homepage** (`/`): the highlights, short enough for phones. **Why Hexford** (`/why`), **Services** (`/services`), **Our work** (`/work`) and **Pricing** (`/pricing`) hold the detail.
+- **Instant quote calculator** (homepage and Pricing): visitors pick what they need and see an estimate, the monthly cost and a spread-the-cost breakdown; "Send me this quote" fills in the enquiry form. Set the figures in **Admin → Packages & prices → Quote calculator**. Until you do, the starting figures in `quoteDefaults` (`src/content/site.ts`) are used. A package price that's a plain amount (e.g. `£995`) is used automatically.
+- **Spinning globe** in the homepage hero, drawn live; it stays still for visitors who've turned on "reduce motion".
+- **Before-and-after slider** on Our work: in **Admin → Portfolio**, add a "Before screenshot" (the client's old site) to a project.
+- **Virtual assistant** ("Ask a question", bottom right; the bottom bar on phones): answers from the website's own packages, prices, plans and FAQs, and hands over to the quote calculator or enquiry form.
+  - Works straight away with built-in answers (it matches questions to your FAQs), at no cost.
+  - **To switch on AI answers:** create an API key at console.anthropic.com, set a monthly spending limit there (e.g. £10), then in Cloudflare add the secret **`ANTHROPIC_API_KEY`**. Optional: `ASSISTANT_MODEL` to choose the model. `/api/status` shows which mode it's in. If the AI is ever unavailable it falls back to the built-in answers.
+- **Phone bottom bar** with "Get a quote" and "Ask a question".
+
+### Database updates
+
+Run each new script in `scripts/updates/` once, in date order, by pasting it into **Neon → SQL Editor**. They're all safe to run again. **Run `2026-11-01-redesign.sql` before deploying the redesign**, because the new code reads the "before screenshot" column.
+
 ## Brand
 
 | | |

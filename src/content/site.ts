@@ -24,12 +24,18 @@ export const business = {
 };
 
 export const nav = [
-  { href: "/#why", label: "Why Hexford" },
-  { href: "/#services", label: "Services" },
-  { href: "/#work", label: "Our work" },
-  { href: "/#packages", label: "Packages" },
-  { href: "/#about", label: "About" },
+  { href: "/why", label: "Why Hexford" },
+  { href: "/services", label: "Services" },
+  { href: "/work", label: "Our work" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/#faqs", label: "FAQs" },
+];
+
+/** The three strongest reasons, for the homepage. The full list (`benefits`) is on /why. */
+export const topBenefits = [
+  { stat: "Yours", title: "You own it", body: "Pay for the build once and the website and domain are yours. No lock-in, ever." },
+  { stat: "£0", title: "No platform fees", body: "No monthly subscription that climbs with every feature. Hosting from £5 a month." },
+  { stat: "1:1", title: "A real person", body: "Talk directly to the senior consultant who built your site. No help-centre queue." },
 ];
 
 export const sellingPoints = ["10+ years in IT and software", "Hand-built, never a template", "You own your website", "Fair, fixed quotes"];
@@ -62,6 +68,7 @@ export type Project = {
   tags: string[];
   url: string; // live site address, or "#" until it's live
   image: string | null; // e.g. "/images/work/bake-chic.webp" — null shows a placeholder
+  beforeImage?: string | null; // screenshot of the client's old site: shows a before-and-after slider on /work
 };
 
 export const portfolio: Project[] = [
@@ -185,6 +192,26 @@ export const oneStop: { icon: IconName; title: string; body: string }[] = [
   { icon: "mail", title: "Business email", body: "Email forwarding included, so hello@yourbusiness.co.uk lands in the inbox you already use. Full mailboxes set up on request." },
   { icon: "move", title: "Moving made easy", body: "Switching from Wix, GoDaddy or another provider? I move your site and domain carefully, so your email keeps working throughout." },
 ];
+
+/**
+ * Instant quote calculator: starting figures in pounds. These are only used until you set your own
+ * in Admin → Packages & prices → Quote calculator (or a package price there is a plain number like £995).
+ * ⚠️ [Check these figures before launch.]
+ */
+export const quoteDefaults = {
+  bronze: 495, // starting price, up to 5 pages
+  silver: 995, // up to 10 pages, admin, bookings, virtual assistant
+  gold: 1795, // online shop or full business system
+  extraPage: 45, // each page above the package's allowance
+  admin: 195, // add an admin area to Bronze
+  bookings: 195, // add online bookings to Bronze
+  assistant: 145, // add a virtual assistant to Bronze
+  move: 75, // move an existing site and domain (included in Silver and Gold)
+  email: 45, // business email set-up (included in Gold)
+  copy: 25, // help writing the words, per page
+  care: 25, // care plan, per month (hosting comes from the Hosting only price)
+};
+export type QuoteConfig = typeof quoteDefaults & { hosting: number };
 
 export const spreadCost = {
   title: "Spread the cost",

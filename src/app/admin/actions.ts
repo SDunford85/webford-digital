@@ -155,6 +155,7 @@ function projectFields(fd: FormData) {
     tags: tags(fd, "tags"),
     url: link(fd, "url"),
     imageUrl: link(fd, "imageUrl"),
+    beforeImageUrl: link(fd, "beforeImageUrl"),
     sortOrder: int(fd, "sortOrder"),
     published: bool(fd, "published"),
   };
