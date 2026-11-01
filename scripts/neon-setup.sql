@@ -70,6 +70,9 @@ CREATE INDEX IF NOT EXISTS "faqs_sort_idx" ON "faqs" USING btree ("sort_order");
 
 CREATE INDEX IF NOT EXISTS "projects_sort_idx" ON "projects" USING btree ("sort_order");
 
+-- ===== 0002_before_image =====
+ALTER TABLE "projects" ADD COLUMN IF NOT EXISTS "before_image_url" text;
+
 -- ===== Starting content (only if the table is empty) =====
 INSERT INTO "site_settings" ("key", "value")
 SELECT * FROM (VALUES
@@ -120,3 +123,4 @@ CREATE SCHEMA IF NOT EXISTS "drizzle";
 CREATE TABLE IF NOT EXISTS "drizzle"."__drizzle_migrations" (id SERIAL PRIMARY KEY, hash text NOT NULL, created_at bigint);
 INSERT INTO "drizzle"."__drizzle_migrations" ("hash", "created_at") SELECT '1720682b183cb947acd8d29c7464ea55bb8c6280511f14d260e6c35a5bbadbe3', 1791808367824 WHERE NOT EXISTS (SELECT 1 FROM "drizzle"."__drizzle_migrations" WHERE "created_at" = 1791808367824);
 INSERT INTO "drizzle"."__drizzle_migrations" ("hash", "created_at") SELECT '02b2cb29b75f3039f3e81782bc2b3eebbc5b33c48b6677427f156c78834ecc8a', 1791815413531 WHERE NOT EXISTS (SELECT 1 FROM "drizzle"."__drizzle_migrations" WHERE "created_at" = 1791815413531);
+INSERT INTO "drizzle"."__drizzle_migrations" ("hash", "created_at") SELECT '4e2e939386575238bef5f4c920f6ddbc98aedbe7103635f70f02ebefdf0a7694', 1793563421240 WHERE NOT EXISTS (SELECT 1 FROM "drizzle"."__drizzle_migrations" WHERE "created_at" = 1793563421240);

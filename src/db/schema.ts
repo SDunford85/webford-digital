@@ -62,6 +62,7 @@ export const projects = pgTable(
     tags: text("tags").array().notNull().default([]),
     url: text("url"), // live site address
     imageUrl: text("image_url"), // e.g. /images/work/bake-chic.webp
+    beforeImageUrl: text("before_image_url"), // optional: the client's old site, for the before-and-after slider
     sortOrder: integer("sort_order").notNull().default(0),
     published: boolean("published").notNull().default(true),
     createdAt: timestamp("created_at").notNull().defaultNow(),

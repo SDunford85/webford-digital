@@ -1,0 +1,1 @@
+ALTER TABLE "projects" ADD COLUMN "before_image_url" text;

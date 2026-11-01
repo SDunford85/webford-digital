@@ -1,5 +1,7 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Assistant } from "@/components/Assistant";
+import { MobileBar } from "@/components/MobileBar";
 import { getSiteContent } from "@/lib/content";
 
 // Every public page reads the contact details from the database, so render on each visit.
@@ -18,6 +20,10 @@ export default async function SiteLayout({ children }: LayoutProps<"/">) {
         {children}
       </main>
       <Footer business={business} />
+      {/* room for the phone bottom bar */}
+      <div className="h-[68px] bg-ink lg:hidden" aria-hidden />
+      <MobileBar />
+      <Assistant />
     </>
   );
 }

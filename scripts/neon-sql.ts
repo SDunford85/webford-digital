@@ -24,7 +24,8 @@ function idempotent(sql: string) {
     .filter(Boolean)
     .map((s) => {
       if (s.startsWith("CREATE TYPE")) return `DO $$ BEGIN\n  ${s.replace(/;$/, "")};\nEXCEPTION WHEN duplicate_object THEN NULL;\nEND $$;`;
-      return s.replace(/^CREATE TABLE "/, 'CREATE TABLE IF NOT EXISTS "').replace(/^CREATE INDEX "/, 'CREATE INDEX IF NOT EXISTS "');
+      return s.replace(/^CREATE TABLE "/, 'CREATE TABLE IF NOT EXISTS "').replace(/^CREATE INDEX "/, 'CREATE INDEX IF NOT EXISTS "')
+        .replace(/ADD COLUMN "/g, 'ADD COLUMN IF NOT EXISTS "');
     })
     .join("\n\n");
 }

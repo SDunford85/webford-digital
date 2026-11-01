@@ -1,6 +1,6 @@
 import { asc } from "drizzle-orm";
 import { getDb, hasDb, schema } from "@/db";
-import { getSettings } from "@/lib/content";
+import { getSettings, getSiteContent } from "@/lib/content";
 import { hostingPlan, spreadCost } from "@/content/site";
 import { AdminForm, Area, Field } from "../../AdminForm";
 import { savePackage, saveSettings } from "../../actions";
@@ -10,6 +10,7 @@ export const metadata = { title: "Packages & prices · Admin" };
 const accent: Record<string, string> = { bronze: "bg-[#a86b3c]", silver: "bg-[#9ca3af]", gold: "bg-gold" };
 
 export default async function AdminPackages() {
+  const { quote } = await getSiteContent();
   const [rows, settings] = hasDb()
     ? await Promise.all([getDb().select().from(schema.packages).orderBy(asc(schema.packages.sortOrder)), getSettings()])
     : [[], {}];
@@ -81,6 +82,37 @@ export default async function AdminPackages() {
             </AdminForm>
           </section>
         </div>
+      )}
+
+      {hasDb() && (
+        <section className="mt-8 rounded-2xl border border-line bg-white p-6">
+          <h2 className="m-0 font-display text-xl font-bold">Quote calculator</h2>
+          <p className="mb-5 mt-1 max-w-[60em] text-sm text-muted">
+            The figures behind the instant quote on your website, in pounds (numbers only). Leave a box empty to use the figure shown. A package price above that&apos;s a
+            plain amount, like <strong>£995</strong>, is used as its starting price automatically.
+          </p>
+          <AdminForm action={saveSettings} submitLabel="Save quote calculator">
+            <div className="mb-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {(
+                [
+                  ["quote_bronze", "Bronze starting price", quote.bronze, "Up to 5 pages"],
+                  ["quote_silver", "Silver starting price", quote.silver, "Up to 10 pages, admin, bookings, assistant"],
+                  ["quote_gold", "Gold starting price", quote.gold, "Online shop or full system"],
+                  ["quote_extra_page", "Each extra page", quote.extraPage, "Above the package's pages"],
+                  ["quote_admin", "Add an admin area (Bronze)", quote.admin, "Included in Silver and Gold"],
+                  ["quote_bookings", "Add online bookings (Bronze)", quote.bookings, "Included in Silver and Gold"],
+                  ["quote_assistant", "Add a virtual assistant (Bronze)", quote.assistant, "Included in Silver and Gold"],
+                  ["quote_move", "Move an existing site (Bronze)", quote.move, "Included in Silver and Gold"],
+                  ["quote_email", "Business email set-up", quote.email, "Included in Gold"],
+                  ["quote_copy", "Help writing the words, per page", quote.copy, "Any package"],
+                  ["quote_care", "Care plan, per month", quote.care, "Hosting only comes from its price above"],
+                ] as const
+              ).map(([name, label, current, hint]) => (
+                <Field key={name} label={label} name={name} type="number" defaultValue={settings[name] ?? ""} hint={`${hint}. Now: £${current}`} />
+              ))}
+            </div>
+          </AdminForm>
+        </section>
       )}
     </>
   );
