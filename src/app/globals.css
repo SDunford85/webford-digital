@@ -126,3 +126,21 @@ details > summary::-webkit-details-marker {
 details[open] .faq-plus {
   transform: rotate(45deg);
 }
+
+/* Launch page: scrolling ticker of key benefits (still for reduced motion) */
+@keyframes hx-ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.hx-ticker {
+  animation: hx-ticker 38s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hx-ticker {
+    animation: none;
+  }
+}
