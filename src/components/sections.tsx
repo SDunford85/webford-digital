@@ -10,7 +10,7 @@ import { Check, Icon } from "./Icon";
 import { LogoMark } from "./Logo";
 import { QuoteCalculator } from "./QuoteCalculator";
 import { AskAssistantButton } from "./AskAssistantButton";
-import { benefits, comparison, costComparison, costYears, features, oneStop, steps, topBenefits } from "@/content/site";
+import { benefits, comparison, costComparison, costYears, features, hostingFreeMonths, oneStop, steps, topBenefits } from "@/content/site";
 import type { SiteContent } from "@/lib/content";
 
 const pad = "px-4 py-12 sm:px-6 sm:py-16 lg:py-24";
@@ -121,7 +121,7 @@ export function WhyFull({ hostingPrice }: { hostingPrice: string }) {
           ))}
         </ul>
         <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-navy-line pt-8">
-          <p className="m-0 font-display text-[19px] font-semibold">One-off build. Optional hosting from {hostingPrice}.</p>
+          <p className="m-0 font-display text-[19px] font-semibold">One-off build. First year&apos;s hosting free, then {hostingPrice}.</p>
           <div className="flex flex-wrap gap-3">
             <Link href="/#quote" className="btn btn-gold">
               Get an instant quote
@@ -442,7 +442,7 @@ export function PackagesCompact({ packages, hostingPrice }: { packages: SiteCont
           ))}
         </ul>
         <p className="m-0 flex flex-wrap gap-x-5 gap-y-2 text-[15px] font-medium">
-          {[`Hosting from ${hostingPrice}`, "Spread the cost, interest free", "Domain and email sorted", "No VAT to add"].map((t) => (
+          {[`First year's hosting free, then ${hostingPrice}`, "Spread the cost, interest free", "Domain and email sorted", "No VAT to add"].map((t) => (
             <span key={t} className="flex items-center gap-2">
               <Check className="h-5 w-5 text-blue" />
               {t}
@@ -519,9 +519,9 @@ export function CostComparison({ quote, dark = false }: { quote: SiteContent["qu
         <div className="grid gap-6 lg:grid-cols-2">
           {costComparison.map((c) => {
             const oursUpfront = quote[c.ours];
-            const ours = oursUpfront + quote.hosting * months;
+            const ours = oursUpfront + quote.hosting * Math.max(0, months - hostingFreeMonths);
             const rows = [
-              { label: `Hexford ${c.ours === "gold" ? "Gold" : "Bronze"}`, detail: `${gbp(oursUpfront)} build + ${gbp(quote.hosting)} a month hosting, no VAT`, total: ours, us: true },
+              { label: `Hexford ${c.ours === "gold" ? "Gold" : "Bronze"}`, detail: `${gbp(oursUpfront)} build, first year's hosting free, then ${gbp(quote.hosting)} a month. No VAT`, total: ours, us: true },
               ...c.rivals.map((r) => ({ label: r.label, detail: r.detail, total: r.upfront + r.monthly * months, us: false })),
             ];
             const max = Math.max(...rows.map((r) => r.total));
@@ -554,8 +554,8 @@ export function CostComparison({ quote, dark = false }: { quote: SiteContent["qu
         </div>
         <p className={`m-0 max-w-[80ch] text-[13.5px] ${muted}`}>
           Totals over {costYears} years ({months} months), rounded to the nearest pound. Other options use published prices from UK web design companies and market price guides,
-          checked November 2026, with 20% VAT added where prices exclude it. Hexford doesn&apos;t charge VAT. Hexford hosting is optional; if you host it yourself the build price is
-          all you pay.
+          checked November 2026, with 20% VAT added where prices exclude it. Hexford doesn&apos;t charge VAT. Hexford hosting is free for the first year and optional after that; if you host
+          it yourself, the build price is all you pay.
         </p>
       </div>
     </section>

@@ -3,14 +3,14 @@ import { getSiteContent } from "@/lib/content";
 
 export const metadata = {
   title: "Pricing",
-  description: "Bronze, Silver and Gold website packages at fair, fixed prices, hosting from £5 a month, and the option to spread the cost interest free.",
+  description: "Bronze, Silver and Gold website packages at fair, fixed prices, with the first year’s hosting free and the option to spread the cost interest free.",
 };
 
 export default async function PricingPage() {
   const content = await getSiteContent();
   return (
     <>
-      <PageHero kicker="Pricing" title="Fair, fixed prices. No surprises." intro="A one-off build at a fixed price, optional hosting from a few pounds a month, and the option to spread the cost." />
+      <PageHero kicker="Pricing" title="Fair, fixed prices. No surprises." intro="A one-off build at a fixed price, your first year’s hosting free, and the option to spread the cost." />
       <PackagesFull content={content} />
       <CostComparison quote={content.quote} />
       <QuoteSection quote={content.quote} />

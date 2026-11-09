@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useId, useMemo, useState } from "react";
-import type { QuoteConfig } from "@/content/site";
+import { hostingFreeMonths, type QuoteConfig } from "@/content/site";
 import { sendToEnquiry } from "@/lib/prefill";
 
 type Tier = "bronze" | "silver" | "gold";
@@ -68,7 +68,11 @@ export function QuoteCalculator({ quote }: { quote: QuoteConfig }) {
       `My instant quote: ${tierName[tier]} package, about ${pages} page${pages > 1 ? "s" : ""}.`,
       chosen.length ? `Extras: ${chosen.join(", ")}.` : "",
       included.length ? `Included: ${included.join(", ")}.` : "",
-      monthly === "none" ? "No monthly plan." : `Monthly plan: ${monthly === "care" ? "hosting and care" : "hosting only"} (${gbp(result.perMonth)}/month).`,
+      monthly === "none"
+        ? "No monthly plan."
+        : monthly === "care"
+          ? `Monthly plan: hosting and care (${gbp(result.perMonth)}/month).`
+          : `Monthly plan: hosting only (first ${hostingFreeMonths} months free, then ${gbp(result.perMonth)}/month).`,
       `Estimate: ${gbp(result.total)}${spread ? `, spread as ${gbp(result.deposit)} deposit then 6 × ${gbp(result.instalment)}` : ""}.`,
     ]
       .filter(Boolean)
@@ -135,7 +139,7 @@ export function QuoteCalculator({ quote }: { quote: QuoteConfig }) {
           <div className="grid gap-3 sm:grid-cols-3">
             {(
               [
-                ["hosting", "Hosting only", `${gbp(quote.hosting)} a month`],
+                ["hosting", "Hosting only", `First year free, then ${gbp(quote.hosting)} a month`],
                 ["care", "Hosting and care", `${gbp(quote.care)} a month`],
                 ["none", "I'll host it myself", "No monthly cost"],
               ] as const
@@ -154,7 +158,12 @@ export function QuoteCalculator({ quote }: { quote: QuoteConfig }) {
         <p className="kicker m-0 text-gold">Your estimate</p>
         <div className="flex flex-col gap-1">
           <span className="font-display text-[clamp(40px,6vw,54px)] font-bold leading-none tracking-[-0.02em]">{gbp(result.total)}</span>
-          <span className="text-muted-dark">one-off build{result.perMonth ? `, then ${gbp(result.perMonth)} a month` : ""}</span>
+          <span className="text-muted-dark">one-off build
+            {result.perMonth
+              ? monthly === "hosting"
+                ? `, first year's hosting free, then ${gbp(result.perMonth)} a month`
+                : `, then ${gbp(result.perMonth)} a month`
+              : ""}</span>
         </div>
         <ul className="m-0 flex list-none flex-col gap-1.5 border-y border-ink-line p-0 py-4 text-[15px] text-muted-dark">
           {result.lines.map((l) => (

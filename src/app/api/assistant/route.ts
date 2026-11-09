@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { benefits, features, oneStop, steps } from "@/content/site";
+import { benefits, features, hostingFreeMonths, oneStop, steps } from "@/content/site";
 import { getSiteContent, type SiteContent } from "@/lib/content";
 
 export const dynamic = "force-dynamic";
@@ -29,7 +29,7 @@ function knowledge(c: SiteContent) {
     "Packages (one-off build, fixed quote after a free chat):",
     ...c.packages.map((p) => `- ${p.name} ${priceOf(p.id, p.price)}: ${p.intro} Includes: ${p.items.join("; ").replace(/[[\]]/g, "")}.`),
     `Extras (estimates): extra page ${gbp(q.extraPage)}; admin area for Bronze ${gbp(q.admin)}; online bookings for Bronze ${gbp(q.bookings)}; virtual assistant for Bronze ${gbp(q.assistant)}; moving an existing site ${gbp(q.move)} (included in Silver and Gold); business email set-up ${gbp(q.email)} (included in Gold); help writing the words ${gbp(q.copy)} a page.`,
-    `Monthly plans (optional, cancel with a month's notice): Hosting only ${c.hostingPlan.price}: ${c.hostingPlan.body} Hosting and care ${gbp(q.care)} a month: ${c.carePlan.body}`,
+    `Hosting: every website build includes its first ${hostingFreeMonths} months of Hosting only free. After that, monthly plans are optional and cancel with a month's notice: Hosting only ${c.hostingPlan.price}: ${c.hostingPlan.body} Hosting and care ${gbp(q.care)} a month (replaces the free hosting if chosen): ${c.carePlan.body}`,
     `${c.spreadCost.title}: ${c.spreadCost.body}`,
     `Domains, hosting and email: ${oneStop.map((o) => `${o.title}: ${o.body}`).join(" ")}`,
     `What we build: ${features.map((f) => `${f.title} (${f.body})`).join("; ")}.`,
@@ -77,7 +77,7 @@ function builtIn(question: string, c: SiteContent): string {
   if (/^(hi|hello|hey|hiya|good (morning|afternoon|evening))\b/.test(q.trim()))
     return "Hello! I can help with prices, what's included, hosting, domains or how the process works. What would you like to know?";
   if (/(price|cost|how much|cheap|afford|budget|£)/.test(q) && !/(host|monthly|month|care)/.test(q))
-    return `Builds start from about ${gbp(qq.bronze)} for Bronze, ${gbp(qq.silver)} for Silver and ${gbp(qq.gold)} for Gold, with hosting from ${c.hostingPlan.price}. You can spread the cost over up to 6 interest-free payments. Try the instant quote calculator for an estimate tailored to you.`;
+    return `Builds start from about ${gbp(qq.bronze)} for Bronze, ${gbp(qq.silver)} for Silver and ${gbp(qq.gold)} for Gold, with the first year's hosting free, then ${c.hostingPlan.price}. You can spread the cost over up to 6 interest-free payments. Try the instant quote calculator for an estimate tailored to you.`;
   if (/(human|person|speak|talk|call|phone|contact|email you|steve)/.test(q))
     return `Steve's happy to help personally. Send him a message with the enquiry form and he'll reply within ${c.business.replyTime.replace(/[[\]]/g, "")}.`;
 
@@ -85,7 +85,7 @@ function builtIn(question: string, c: SiteContent): string {
   let best = { score: 0, answer: "" };
   const candidates = [
     ...c.faqs.map((f) => ({ text: `${f.q} ${f.q} ${f.a}`, answer: f.a })),
-    { text: "hosting monthly month plan care support updates backup", answer: `Hosting only is ${c.hostingPlan.price}: ${c.hostingPlan.body} Hosting and care is ${gbp(qq.care)} a month and adds updates, backups and small changes. Both are optional.` },
+    { text: "hosting monthly month plan care support updates backup", answer: `Every website comes with its first year of hosting free. After that, Hosting only is ${c.hostingPlan.price}: ${c.hostingPlan.body} Hosting and care is ${gbp(qq.care)} a month and adds updates, backups and small changes. Both are optional.` },
     { text: "spread pay payment instalment monthly deposit finance", answer: c.spreadCost.body },
     { text: "process step how work start long time", answer: `It's simple: ${steps.map((s) => s.title.toLowerCase()).join(", then ")}. You'll see a design and a fixed price before any build starts.` },
     ...oneStop.map((o) => ({ text: `${o.title} ${o.body}`, answer: o.body })),

@@ -34,11 +34,11 @@ export const nav = [
 /** The three strongest reasons, for the homepage. The full list (`benefits`) is on /why. */
 export const topBenefits = [
   { stat: "Yours", title: "You own it", body: "Pay for the build once and the website and domain are yours. No lock-in, ever." },
-  { stat: "£0", title: "No platform fees", body: "No monthly subscription that climbs with every feature. Hosting from £5 a month." },
+  { stat: "£0", title: "No platform fees", body: "No monthly subscription that climbs with every feature. First year’s hosting free, then £5 a month." },
   { stat: "1:1", title: "A real person", body: "Talk directly to the senior consultant who built your site. No help-centre queue." },
 ];
 
-export const sellingPoints = ["10+ years in IT and software", "Hand-built, never a template", "You own your website", "Fair, fixed quotes"];
+export const sellingPoints = ["10+ years in IT and software", "Hand-built, never a template", "You own your website", "First year’s hosting free"];
 
 export const comparison: { label: string; template: string; ours: string }[] = [
   { label: "Design", template: "Pick a theme, fill the gaps", ours: "Designed from scratch for your brand" },
@@ -126,7 +126,8 @@ export const packages: Package[] = [
     intro: "A professional presence for sole traders and new businesses.",
     price: "£399",
     items: [
-      "Bespoke design, up to [5] pages",
+      "Bespoke design, up to 5 pages",
+      "First year’s hosting free",
       "Mobile-friendly and fast",
       "Enquiry form to your inbox",
       "Photo gallery",
@@ -144,7 +145,8 @@ export const packages: Package[] = [
     intro: "For growing businesses that want to manage their own site and take bookings.",
     price: "£795",
     items: [
-      "Everything in Bronze, up to [10] pages",
+      "Everything in Bronze, up to 10 pages",
+      "First year’s hosting free",
       "Admin site for instant updates",
       "Online bookings or appointments",
       "Virtual agent for your FAQs",
@@ -163,6 +165,7 @@ export const packages: Package[] = [
     badge: "Most complete",
     items: [
       "Everything in Silver, pages to suit",
+      "First year’s hosting free",
       "Full e-commerce with card payments",
       "Product, stock and order management",
       "Sales and booking reports",
@@ -180,15 +183,18 @@ export const carePlan = {
   body: "Everything in Hosting, plus software updates, backups, uptime checks and up to 30 minutes of changes a month.",
 };
 
+/** Every build includes this many months of Hosting only, free. */
+export const hostingFreeMonths = 12;
+
 export const hostingPlan = {
   price: "£5/month",
-  body: "Fast, secure hosting with a security certificate, your domain renewal and email forwarding included. Changes are charged only when you need them.",
+  body: "First year free with every website, then £5 a month. Fast, secure hosting with a security certificate, your domain renewal and email forwarding included. Changes are charged only when you need them.",
 };
 
 /** "Everything in one place": domains, hosting, email and moving from another provider. */
 export const oneStop: { icon: IconName; title: string; body: string }[] = [
   { icon: "globe", title: "Your domain name", body: "Chosen together and registered in your business’s name, with the first year included. Already have one? I’ll look after it or move it across." },
-  { icon: "shield", title: "Hosting and security", body: "Fast, secure hosting with a security certificate, so the padlock shows in every browser. From £5 a month." },
+  { icon: "shield", title: "Hosting and security", body: "Fast, secure hosting with a security certificate, so the padlock shows in every browser. First year free, then £5 a month." },
   { icon: "mail", title: "Business email", body: "Email forwarding included, so hello@yourbusiness.co.uk lands in the inbox you already use. Full mailboxes set up on request." },
   { icon: "move", title: "Moving made easy", body: "Switching from Wix, GoDaddy or another provider? I move your site and domain carefully, so your email keeps working throughout." },
 ];
@@ -264,11 +270,11 @@ export const faqs = [
   { q: "How long does a build take?", a: "Typically [X–Y] weeks, depending on the package and how quickly content is ready." },
   { q: "Can I update the website myself?", a: "Yes. Silver and Gold include an admin site, and every build comes with a user guide." },
   { q: "Will I own my website and domain?", a: "Yes. Your domain is always registered in your business’s name, and once the build is paid for, the website is yours too. If you ever leave, I’ll transfer the domain and hand over your site’s code and content." },
-  { q: "Do I need to sort out my own domain and hosting?", a: "No, I handle it all. I’ll help you choose a domain, register it in your name (the first year is included), and host your site from £5 a month, with renewals included." },
+  { q: "Do I need to sort out my own domain and hosting?", a: "No, I handle it all. I’ll help you choose a domain, register it in your name (the first year is included), and host your site with the first year free, then £5 a month with renewals included." },
   { q: "I already have a website and domain. Can you take it over?", a: "Yes. You can keep your domain where it is and I’ll point it to your new site, or move it across so everything is in one place and one bill. I check your email settings first, so nothing stops working during the switch." },
   { q: "Can I have a business email address?", a: "Yes. Every site includes email forwarding, so messages to hello@yourbusiness.co.uk arrive in the inbox you already use. If you need full mailboxes, I can set up Google Workspace or a lower-cost alternative for you." },
   { q: "Do you only work with local businesses?", a: "No. I work with businesses anywhere in the UK. Everything runs smoothly by video call, phone and email, and you get the same one-to-one service wherever you are." },
-  { q: "Do you offer hosting and support?", a: "Yes. Hosting only is £5 a month, or choose the care plan for updates, backups and small changes each month. Both are optional and cancel with a month’s notice." },
+  { q: "Do you offer hosting and support?", a: "Yes. Every website comes with its first year of hosting free, then Hosting only is £5 a month. Or choose the care plan for updates, backups and small changes each month. Both are optional and cancel with a month’s notice." },
 ];
 
 export const enquiryNeeds = ["New website", "Redesign of my current site", "Online shop", "Bookings or appointments", "Not sure yet"];
