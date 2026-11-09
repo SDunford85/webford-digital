@@ -1,4 +1,4 @@
-import { AdminShowcase, Comparison, CtaBand, PageHero, WhyFull } from "@/components/sections";
+import { AdminShowcase, Comparison, CostComparison, CtaBand, PageHero, WhyFull } from "@/components/sections";
 import { getSiteContent } from "@/lib/content";
 
 export const metadata = {
@@ -7,12 +7,13 @@ export const metadata = {
 };
 
 export default async function WhyPage() {
-  const { hostingPlan } = await getSiteContent();
+  const { hostingPlan, quote } = await getSiteContent();
   return (
     <>
       <PageHero kicker="Why Hexford" title="Don’t rent a website. Own one." intro="A website built around your business by a senior software consultant, at a fair, fixed price, and yours to keep." />
       <WhyFull hostingPrice={hostingPlan.price} />
       <Comparison />
+      <CostComparison quote={quote} dark />
       <AdminShowcase />
       <CtaBand />
     </>

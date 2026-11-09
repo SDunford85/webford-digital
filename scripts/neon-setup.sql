@@ -81,7 +81,7 @@ SELECT * FROM (VALUES
   ('address', '[Business address]'),
   ('area', 'Anywhere in the UK, by video call, phone and email'),
   ('reply_time', '[1 working day]'),
-  ('care_plan_price', '£[PRICE]/month'),
+  ('care_plan_price', '£25/month'),
   ('care_plan_body', 'Everything in Hosting, plus software updates, backups, uptime checks and up to 30 minutes of changes a month.'),
   ('hosting_price', '£5/month'),
   ('hosting_body', 'Fast, secure hosting with a security certificate, your domain renewal and email forwarding included. Changes are charged only when you need them.'),
@@ -91,9 +91,9 @@ SELECT * FROM (VALUES
 WHERE NOT EXISTS (SELECT 1 FROM "site_settings");
 INSERT INTO "packages" ("id", "name", "intro", "price", "badge", "items", "sort_order")
 SELECT * FROM (VALUES
-  ('bronze', 'Bronze', 'A professional presence for sole traders and new businesses.', '£[PRICE]', NULL, ARRAY['Bespoke design, up to [5] pages', 'Mobile-friendly and fast', 'Enquiry form to your inbox', 'Photo gallery', 'Embedded maps, videos and social links', 'Basic SEO set-up', 'Your domain name, registered to you (first year included)', 'Email forwarding, e.g. hello@yourbusiness.co.uk', 'User guide', '[30] days post-launch support']::text[], 0),
-  ('silver', 'Silver', 'For growing businesses that want to manage their own site and take bookings.', '£[PRICE]', NULL, ARRAY['Everything in Bronze, up to [10] pages', 'Admin site for instant updates', 'Online bookings or appointments', 'Virtual agent for your FAQs', 'Links and embeds for your external apps', 'Visitor analytics', 'Move your existing site and domain to us', 'Personal handover session', '[60] days post-launch support']::text[], 1),
-  ('gold', 'Gold', 'A full online shop or business system, built and connected end to end.', '£[PRICE]', 'Most complete', ARRAY['Everything in Silver, pages to suit', 'Full e-commerce with card payments', 'Product, stock and order management', 'Sales and booking reports', 'API integrations with your systems', 'Customer accounts', 'Business email set-up', 'Detailed user guide and training', '[90] days post-launch support']::text[], 2)
+  ('bronze', 'Bronze', 'A professional presence for sole traders and new businesses.', '£399', NULL, ARRAY['Bespoke design, up to [5] pages', 'Mobile-friendly and fast', 'Enquiry form to your inbox', 'Photo gallery', 'Embedded maps, videos and social links', 'Basic SEO set-up', 'Your domain name, registered to you (first year included)', 'Email forwarding, e.g. hello@yourbusiness.co.uk', 'User guide', '[30] days post-launch support']::text[], 0),
+  ('silver', 'Silver', 'For growing businesses that want to manage their own site and take bookings.', '£795', NULL, ARRAY['Everything in Bronze, up to [10] pages', 'Admin site for instant updates', 'Online bookings or appointments', 'Virtual agent for your FAQs', 'Links and embeds for your external apps', 'Visitor analytics', 'Move your existing site and domain to us', 'Personal handover session', '[60] days post-launch support']::text[], 1),
+  ('gold', 'Gold', 'A full online shop or business system, built and connected end to end.', '£1,495', 'Most complete', ARRAY['Everything in Silver, pages to suit', 'Full e-commerce with card payments', 'Product, stock and order management', 'Sales and booking reports', 'API integrations with your systems', 'Customer accounts', 'Business email set-up', 'Detailed user guide and training', '[90] days post-launch support']::text[], 2)
 ) AS v
 WHERE NOT EXISTS (SELECT 1 FROM "packages");
 INSERT INTO "projects" ("name", "summary", "tags", "url", "image_url", "sort_order")

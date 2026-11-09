@@ -10,7 +10,7 @@ import { Check, Icon } from "./Icon";
 import { LogoMark } from "./Logo";
 import { QuoteCalculator } from "./QuoteCalculator";
 import { AskAssistantButton } from "./AskAssistantButton";
-import { benefits, comparison, features, oneStop, steps, topBenefits } from "@/content/site";
+import { benefits, comparison, costComparison, costYears, features, oneStop, steps, topBenefits } from "@/content/site";
 import type { SiteContent } from "@/lib/content";
 
 const pad = "px-4 py-12 sm:px-6 sm:py-16 lg:py-24";
@@ -442,13 +442,14 @@ export function PackagesCompact({ packages, hostingPrice }: { packages: SiteCont
           ))}
         </ul>
         <p className="m-0 flex flex-wrap gap-x-5 gap-y-2 text-[15px] font-medium">
-          {[`Hosting from ${hostingPrice}`, "Spread the cost, interest free", "Domain and email sorted"].map((t) => (
+          {[`Hosting from ${hostingPrice}`, "Spread the cost, interest free", "Domain and email sorted", "No VAT to add"].map((t) => (
             <span key={t} className="flex items-center gap-2">
               <Check className="h-5 w-5 text-blue" />
               {t}
             </span>
           ))}
         </p>
+        <More href="/pricing#three-year-cost">See what it costs over 3 years compared with others</More>
       </div>
     </section>
   );
@@ -489,6 +490,73 @@ export function PackagesFull({ content }: { content: SiteContent }) {
           ))}
         </div>
         <p className="m-0 text-sm text-muted">Monthly plans are optional and cancel any time with a month&apos;s notice. Prefer to host it yourself? Your site and its code are handed over to you.</p>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- 3-year cost comparison ---------- */
+
+const gbp = (n: number) => `£${Math.round(n).toLocaleString("en-GB")}`;
+
+export function CostComparison({ quote, dark = false }: { quote: SiteContent["quote"]; dark?: boolean }) {
+  const months = costYears * 12;
+  const muted = dark ? "text-muted-dark" : "text-muted";
+  return (
+    <section id="three-year-cost" aria-labelledby="cost-h" className={`scroll-mt-20 ${dark ? "bg-ink text-white" : ""}`}>
+      <div className={`container-wf flex flex-col gap-10 ${pad}`}>
+        <Heading
+          kicker={`The real cost over ${costYears} years`}
+          id="cost-h"
+          dark={dark}
+          title={
+            <>
+              Cheaper to start. <span className={dark ? "text-gold" : "text-blue"}>Much cheaper to keep.</span>
+            </>
+          }
+          intro="A low build price can hide a monthly fee that never stops. Here’s what each option costs once you add the monthly charges."
+        />
+        <div className="grid gap-6 lg:grid-cols-2">
+          {costComparison.map((c) => {
+            const oursUpfront = quote[c.ours];
+            const ours = oursUpfront + quote.hosting * months;
+            const rows = [
+              { label: `Hexford ${c.ours === "gold" ? "Gold" : "Bronze"}`, detail: `${gbp(oursUpfront)} build + ${gbp(quote.hosting)} a month hosting, no VAT`, total: ours, us: true },
+              ...c.rivals.map((r) => ({ label: r.label, detail: r.detail, total: r.upfront + r.monthly * months, us: false })),
+            ];
+            const max = Math.max(...rows.map((r) => r.total));
+            const saving = Math.min(...rows.filter((r) => !r.us).map((r) => r.total)) - ours;
+            return (
+              <article key={c.title} className={`flex flex-col gap-5 rounded-2xl border p-6 sm:p-7 ${dark ? "border-ink-line bg-ink-2" : "border-line bg-white"}`}>
+                <div className="flex flex-wrap items-baseline justify-between gap-3">
+                  <h3 className="m-0 font-display text-[20px] font-bold">{c.title}</h3>
+                  {saving > 0 ? (
+                    <span className="rounded-full bg-gold px-3 py-1 text-[13px] font-bold text-ink">Save at least {gbp(saving)}</span>
+                  ) : null}
+                </div>
+                <ul className="m-0 flex list-none flex-col gap-4 p-0">
+                  {rows.map((r) => (
+                    <li key={r.label} className="flex flex-col gap-1.5">
+                      <div className="flex items-baseline justify-between gap-3">
+                        <span className={`font-bold ${r.us ? "" : muted}`}>{r.label}</span>
+                        <span className={`shrink-0 font-display text-[20px] font-bold ${r.us ? (dark ? "text-gold" : "text-blue") : ""}`}>{gbp(r.total)}</span>
+                      </div>
+                      <div className={`h-3 overflow-hidden rounded-full ${dark ? "bg-ink" : "bg-stone"}`} aria-hidden>
+                        <div className={`h-full rounded-full ${r.us ? "bg-gold" : dark ? "bg-[#3a4150]" : "bg-[#c7cfdc]"}`} style={{ width: `${Math.max(4, (r.total / max) * 100)}%` }} />
+                      </div>
+                      <span className={`text-[14px] ${muted}`}>{r.detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            );
+          })}
+        </div>
+        <p className={`m-0 max-w-[80ch] text-[13.5px] ${muted}`}>
+          Totals over {costYears} years ({months} months), rounded to the nearest pound. Other options use published prices from UK web design companies and market price guides,
+          checked November 2026, with 20% VAT added where prices exclude it. Hexford doesn&apos;t charge VAT. Hexford hosting is optional; if you host it yourself the build price is
+          all you pay.
+        </p>
       </div>
     </section>
   );

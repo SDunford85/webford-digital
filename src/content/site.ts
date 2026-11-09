@@ -124,7 +124,7 @@ export const packages: Package[] = [
     id: "bronze",
     name: "Bronze",
     intro: "A professional presence for sole traders and new businesses.",
-    price: "£[PRICE]",
+    price: "£399",
     items: [
       "Bespoke design, up to [5] pages",
       "Mobile-friendly and fast",
@@ -142,7 +142,7 @@ export const packages: Package[] = [
     id: "silver",
     name: "Silver",
     intro: "For growing businesses that want to manage their own site and take bookings.",
-    price: "£[PRICE]",
+    price: "£795",
     items: [
       "Everything in Bronze, up to [10] pages",
       "Admin site for instant updates",
@@ -159,7 +159,7 @@ export const packages: Package[] = [
     id: "gold",
     name: "Gold",
     intro: "A full online shop or business system, built and connected end to end.",
-    price: "£[PRICE]",
+    price: "£1,495",
     badge: "Most complete",
     items: [
       "Everything in Silver, pages to suit",
@@ -176,7 +176,7 @@ export const packages: Package[] = [
 ];
 
 export const carePlan = {
-  price: "£[PRICE]/month",
+  price: "£25/month",
   body: "Everything in Hosting, plus software updates, backups, uptime checks and up to 30 minutes of changes a month.",
 };
 
@@ -196,12 +196,11 @@ export const oneStop: { icon: IconName; title: string; body: string }[] = [
 /**
  * Instant quote calculator: starting figures in pounds. These are only used until you set your own
  * in Admin → Packages & prices → Quote calculator (or a package price there is a plain number like £995).
- * ⚠️ [Check these figures before launch.]
  */
 export const quoteDefaults = {
-  bronze: 495, // starting price, up to 5 pages
-  silver: 995, // up to 10 pages, admin, bookings, virtual assistant
-  gold: 1795, // online shop or full business system
+  bronze: 399, // starting price, up to 5 pages
+  silver: 795, // up to 10 pages, admin, bookings, virtual assistant
+  gold: 1495, // online shop or full business system
   extraPage: 45, // each page above the package's allowance
   admin: 195, // add an admin area to Bronze
   bookings: 195, // add online bookings to Bronze
@@ -212,6 +211,36 @@ export const quoteDefaults = {
   care: 25, // care plan, per month (hosting comes from the Hosting only price)
 };
 export type QuoteConfig = typeof quoteDefaults & { hosting: number };
+
+/**
+ * "What it really costs over 3 years" (Pricing and Why pages). Competitor figures are published prices
+ * from UK web design companies, checked November 2026 (they're shown without naming the companies).
+ * VAT is added to them because their prices exclude it; Hexford, as a sole trader below the VAT threshold,
+ * doesn't charge VAT. ⚠️ If you register for VAT, update the note in CostComparison.
+ */
+export const costYears = 3;
+export const costComparison: {
+  title: string;
+  ours: "bronze" | "gold";
+  rivals: { label: string; detail: string; upfront: number; monthly: number }[];
+}[] = [
+  {
+    title: "An online shop",
+    ours: "gold",
+    rivals: [
+      { label: "Budget agency shop with a monthly plan", detail: "£1,399 build + £26.99 a month, plus VAT", upfront: 1399 * 1.2, monthly: 26.99 * 1.2 },
+      { label: "Pay-monthly website subscription", detail: "£99.99 a month, plus VAT", upfront: 0, monthly: 99.99 * 1.2 },
+    ],
+  },
+  {
+    title: "A professional business website",
+    ours: "bronze",
+    rivals: [
+      { label: "Typical brochure website from a web designer", detail: "£1,000–£1,500 build, then £20–£40 a month hosting (from £1,720)", upfront: 1000, monthly: 20 },
+      { label: "Pay-monthly website subscription", detail: "£49.99 a month, plus VAT", upfront: 0, monthly: 49.99 * 1.2 },
+    ],
+  },
+];
 
 export const spreadCost = {
   title: "Spread the cost",
