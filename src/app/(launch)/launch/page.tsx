@@ -3,6 +3,7 @@ import { AskAssistantButton } from "@/components/AskAssistantButton";
 import { Check, Icon } from "@/components/Icon";
 import { LogoMark } from "@/components/Logo";
 import { SpinningGlobe } from "@/components/SpinningGlobe";
+import { BuyerQuestions } from "@/components/sections";
 import { costYears, hostingFreeMonths } from "@/content/site";
 import { getSiteContent } from "@/lib/content";
 
@@ -237,6 +238,9 @@ export default async function LaunchPage() {
           </div>
         </section>
       ) : null}
+
+      {/* ---------- Before you buy ---------- */}
+      <BuyerQuestions quote={quote} />
 
       {/* ---------- Final call ---------- */}
       <section aria-labelledby="cta-h" className="relative overflow-hidden bg-blue text-white">

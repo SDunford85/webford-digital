@@ -1,4 +1,4 @@
-import { Contact, CostComparison, Faqs, OneStop, PackagesFull, PageHero, QuoteSection } from "@/components/sections";
+import { BuyerQuestions, Contact, CostComparison, Faqs, OneStop, PackagesFull, PageHero, QuoteSection } from "@/components/sections";
 import { getSiteContent } from "@/lib/content";
 
 export const metadata = {
@@ -13,6 +13,7 @@ export default async function PricingPage() {
       <PageHero kicker="Pricing" title="Fair, fixed prices. No surprises." intro="A one-off build at a fixed price, your first year’s hosting free, and the option to spread the cost." />
       <PackagesFull content={content} />
       <CostComparison quote={content.quote} />
+      <BuyerQuestions quote={content.quote} />
       <QuoteSection quote={content.quote} />
       <OneStop />
       <Faqs faqs={content.faqs} />

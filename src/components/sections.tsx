@@ -10,7 +10,7 @@ import { Check, Icon } from "./Icon";
 import { LogoMark } from "./Logo";
 import { QuoteCalculator } from "./QuoteCalculator";
 import { AskAssistantButton } from "./AskAssistantButton";
-import { benefits, comparison, costComparison, costYears, features, hostingFreeMonths, oneStop, steps, topBenefits } from "@/content/site";
+import { benefits, buyerQuestions, comparison, costComparison, costYears, features, hostingFreeMonths, oneStop, steps, topBenefits } from "@/content/site";
 import type { SiteContent } from "@/lib/content";
 
 const pad = "px-4 py-12 sm:px-6 sm:py-16 lg:py-24";
@@ -554,9 +554,50 @@ export function CostComparison({ quote, dark = false }: { quote: SiteContent["qu
         </div>
         <p className={`m-0 max-w-[80ch] text-[13.5px] ${muted}`}>
           Totals over {costYears} years ({months} months), rounded to the nearest pound. Other options use published prices from UK web design companies and market price guides,
-          checked November 2026, with 20% VAT added where prices exclude it. Hexford doesn&apos;t charge VAT. Hexford hosting is free for the first year and optional after that; if you host
+          checked November 2026, with 20% VAT added where prices exclude it. The social media offer is an example of a typical low-cost deal, not a specific company. Hexford doesn&apos;t charge VAT. Hexford hosting is free for the first year and optional after that; if you host
           it yourself, the build price is all you pay.
         </p>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- before you buy a cheap website ---------- */
+
+export function BuyerQuestions({ quote, dark = false }: { quote: SiteContent["quote"]; dark?: boolean }) {
+  const muted = dark ? "text-muted-dark" : "text-muted";
+  return (
+    <section id="before-you-buy" aria-labelledby="buy-h" className={`scroll-mt-20 ${dark ? "bg-ink text-white" : "bg-stone"}`}>
+      <div className={`container-wf flex flex-col gap-10 ${pad}`}>
+        <Heading
+          kicker="Thinking of a cheaper website?"
+          id="buy-h"
+          dark={dark}
+          title={
+            <>
+              Five questions to ask <span className={dark ? "text-gold" : "text-blue"}>before you buy.</span>
+            </>
+          }
+          intro="A low price is great if it’s the whole price. Ask any web designer these questions, including me. Here are my answers."
+        />
+        <ol className="m-0 grid list-none gap-4 p-0 md:grid-cols-2 lg:grid-cols-3">
+          {buyerQuestions.map((b, i) => (
+            <li key={b.q} className={`flex flex-col gap-3 rounded-2xl border p-6 ${dark ? "border-ink-line bg-ink-2" : "border-line bg-white"}`}>
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gold font-display text-[17px] font-bold text-ink">{i + 1}</span>
+              <h3 className="m-0 font-display text-[19px] font-bold leading-snug">{b.q}</h3>
+              <p className={`m-0 text-[15.5px] ${muted}`}>
+                <strong className={dark ? "text-gold" : "text-blue"}>Hexford: </strong>
+                {b.a.replace("{hosting}", gbp(quote.hosting))}
+              </p>
+            </li>
+          ))}
+          <li className={`flex flex-col justify-center gap-4 rounded-2xl p-6 ${dark ? "bg-gold text-ink" : "bg-ink text-white"}`}>
+            <p className="m-0 font-display text-[22px] font-bold leading-snug">Got a quote from someone else? Send it over and I’ll tell you honestly how it compares.</p>
+            <Link href="/#contact" className={`btn self-start ${dark ? "btn-blue" : "btn-gold"}`}>
+              Ask me
+            </Link>
+          </li>
+        </ol>
       </div>
     </section>
   );

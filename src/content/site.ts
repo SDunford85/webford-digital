@@ -242,6 +242,7 @@ export const costComparison: {
     title: "A professional business website",
     ours: "bronze",
     rivals: [
+      { label: "Cheap website advertised on social media", detail: "An example offer: £199 build, then £25 a month for hosting and updates", upfront: 199, monthly: 25 },
       { label: "Typical brochure website from a web designer", detail: "£1,000–£1,500 build, then £20–£40 a month hosting (from £1,720)", upfront: 1000, monthly: 20 },
       { label: "Pay-monthly website subscription", detail: "£49.99 a month, plus VAT", upfront: 0, monthly: 49.99 * 1.2 },
     ],
@@ -275,6 +276,16 @@ export const faqs = [
   { q: "Can I have a business email address?", a: "Yes. Every site includes email forwarding, so messages to hello@yourbusiness.co.uk arrive in the inbox you already use. If you need full mailboxes, I can set up Google Workspace or a lower-cost alternative for you." },
   { q: "Do you only work with local businesses?", a: "No. I work with businesses anywhere in the UK. Everything runs smoothly by video call, phone and email, and you get the same one-to-one service wherever you are." },
   { q: "Do you offer hosting and support?", a: "Yes. Every website comes with its first year of hosting free, then Hosting only is £5 a month. Or choose the care plan for updates, backups and small changes each month. Both are optional and cancel with a month’s notice." },
+  { q: "Why not just buy a cheap website from a social media ad?", a: "Some are fine, but check the monthly fee, the minimum term and who owns the website. A £199 website at £25 a month costs £1,099 over three years. A Hexford Bronze website costs £519 over the same time, with no VAT, and it’s yours." },
+];
+
+/** "Before you buy a cheap website": the questions to ask any web designer, with Hexford's answers. */
+export const buyerQuestions: { q: string; a: string }[] = [
+  { q: "Who will own the website and the domain?", a: "You will. Your domain is registered in your business’s name, and the website is yours once it’s paid for." },
+  { q: "Is there a monthly fee, and a minimum term?", a: "Your first year’s hosting is free, then it’s {hosting} a month. There’s no minimum term: cancel with a month’s notice." },
+  { q: "What happens if I want to leave?", a: "I transfer your domain and hand over your website’s code and content, so you can take it anywhere." },
+  { q: "What exactly does the price include?", a: "You get a fixed quote after a free chat, listing every page and feature. No VAT is added on top." },
+  { q: "Who will I actually be dealing with?", a: "Me, the person who designs and builds your website. UK-based, with more than 10 years in business software." },
 ];
 
 export const enquiryNeeds = ["New website", "Redesign of my current site", "Online shop", "Bookings or appointments", "Not sure yet"];
